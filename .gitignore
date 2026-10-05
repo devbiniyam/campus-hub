@@ -4,6 +4,8 @@ Frontend/node_modules/
 
 # Production build
 Frontend/build/
+staticfiles/
+Backend/backend/staticfiles/
 build/
 dist/
 

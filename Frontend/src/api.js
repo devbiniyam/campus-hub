@@ -1,17 +1,20 @@
 // Dynamic API Base resolution:
 // 1. REACT_APP_API_BASE environment variable (e.g., in production Vercel deployment)
-// 2. Fallback to http://localhost:8000/api for local dev
+// 2. Fallback to http://127.0.0.1:8000/api for local dev
 // 3. Fallback to /api for reverse proxy or unified container deployment
-export const API_BASE =
+const rawBase =
   process.env.REACT_APP_API_BASE ||
-  (typeof window !== "undefined" && window.location && window.location.hostname === "localhost"
-    ? "http://localhost:8000/api"
+  (typeof window !== "undefined" && window.location && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+    ? "http://127.0.0.1:8000/api"
     : "/api");
+
+export const API_BASE = rawBase.replace(/\/+$/, "");
 
 export async function apiFetch(path, options = {}) {
   const token = localStorage.getItem("access_token");
 
-  const url = path.startsWith("http") ? path : `${API_BASE}${path}`;
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  const url = path.startsWith("http") ? path : `${API_BASE}${cleanPath}`;
 
   const res = await fetch(url, {
     ...options,

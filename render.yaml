@@ -8,7 +8,7 @@ services:
   - type: web
     name: campus-hub-backend
     runtime: python
-    buildCommand: "./build.sh"
+    buildCommand: "bash ./build.sh"
     startCommand: "gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT"
     rootDir: Backend/backend
     plan: free
@@ -22,6 +22,18 @@ services:
       - key: DEBUG
         value: "false"
       - key: ALLOWED_HOSTS
-        value: ".onrender.com,localhost,127.0.0.1"
+        value: ".onrender.com,localhost,127.0.0.1,.vercel.app"
       - key: CORS_ALLOW_ALL_ORIGINS
         value: "true"
+
+  - type: static
+    name: campus-hub-frontend
+    rootDir: Frontend
+    buildCommand: "npm install && npm run build"
+    staticPublishPath: "./build"
+    plan: free
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+

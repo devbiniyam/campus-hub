@@ -1,70 +1,135 @@
-# Campus Hub
+<div align="center">
 
-A full-stack university campus management system built with **Django REST Framework** and **React**. Designed to handle the complete academic lifecycle — from student registration and course enrollment to grade submission and dormitory management — with role-based access for students, teachers, and admins.
+# 🏛️ Campus Hub — Academic Operations Platform
 
-Now featuring a **modern landing page**, **1-click interactive demo testing (like FeeBridge)**, an **in-app demo role switcher**, and **production cloud deployment blueprints** for Render and Vercel.
+**A full-stack, enterprise-grade university academic management platform built with Django REST Framework and React.**
+
+[![Django](https://img.shields.io/badge/Django-6.1-092E20?style=for-the-badge&logo=django&logoColor=white)](https://www.djangoproject.com/)
+[![Django REST Framework](https://img.shields.io/badge/DRF-3.18-red?style=for-the-badge&logo=django&logoColor=white)](https://www.django-rest-framework.org/)
+[![React](https://img.shields.io/badge/React-18.2-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![WhiteNoise](https://img.shields.io/badge/WhiteNoise-Static_Assets-blue?style=for-the-badge)](http://whitenoise.evans.io/)
+[![SimpleJWT](https://img.shields.io/badge/Auth-SimpleJWT_Bearer-orange?style=for-the-badge)](https://django-rest-framework-simplejwt.readthedocs.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+
+[Architecture](#architecture--system-design) • [Interactive Demos](#interactive-demo-testing) • [Cloud Deployment ("Deploy as New")](#cloud-deployment-guide-deploy-as-new) • [Local Setup](#local-development-setup) • [API Reference](#api-reference)
+
+</div>
 
 ---
 
-## Table of Contents
+## 📑 Table of Contents
 
 - [Overview](#overview)
+- [Multi-Color Light Design System](#multi-color-light-design-system)
 - [Interactive Demo Testing](#interactive-demo-testing)
-- [Landing Page & Live GPA Tool](#landing-page--live-gpa-tool)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
+- [Architecture & System Design](#architecture--system-design)
+- [Features by Role](#features-by-role)
+- [Academic Rules Engine](#academic-rules-engine)
+- [Cloud Deployment Guide ("Deploy as New")](#cloud-deployment-guide-deploy-as-new)
+  - [Option A: 1-Click Render Blueprint (Full-Stack + PostgreSQL)](#option-a-1-click-render-blueprint-full-stack--postgresql)
+  - [Option B: Hybrid Cloud (Render Backend + Vercel Frontend)](#option-b-hybrid-cloud-render-backend--vercel-frontend)
+  - [Environment Variables Matrix](#environment-variables-matrix)
+- [Local Development Setup](#local-development-setup)
   - [Backend Setup](#backend-setup)
   - [Frontend Setup](#frontend-setup)
   - [Running Automated Tests](#running-automated-tests)
-- [Cloud Deployment Guide](#cloud-deployment-guide)
-  - [Render Deployment (Backend + PostgreSQL)](#render-deployment-backend--postgresql)
-  - [Vercel Deployment (Frontend)](#vercel-deployment-frontend)
-- [API Reference](#api-reference)
-- [Role-Based Access](#role-based-access)
-- [Academic Flow](#academic-flow)
-- [Environment Variables](#environment-variables)
+- [API Reference & Security](#api-reference--security)
+- [Project Structure](#project-structure)
+- [License & Author](#license--author)
 
 ---
 
 ## Overview
 
-Campus Hub is a management platform that mirrors real university workflows. An admin sets up semesters, departments, and courses. Students register for courses each semester. Admins approve registrations, which atomically creates enrollments. Teachers submit marks which automatically derive letter grades. Academic standing is calculated automatically based on GPA rules.
+**Campus Hub** is an institutional academic management system that mirrors real-world university registrar and faculty workflows. The platform orchestrates the complete student lifecycle — from semester configuration, department catalogs, and course registration to atomic enrollment approvals, mark-to-grade conversions, cumulative GPA calculations, and dormitory room allocations.
 
-Every piece of the system enforces business rules at the database level — not just in the frontend — making the platform robust and consistent regardless of how data enters the system.
+Every business rule is enforced at the database and transaction level — not merely in the UI — preventing invalid course enrollments, duplicate registrations, capacity oversubscription, or grade inconsistencies.
+
+---
+
+## Multi-Color Light Design System
+
+Campus Hub features a bespoke, multi-color light design system:
+- **Base Canvas**: Soft slate `#f8fafc` with crisp white cards (`#ffffff`) and subtle structural borders (`#e2e8f0`).
+- **High-Contrast Typography**: Slate-900 (`#0f172a`) headers, slate-700 (`#334155`) body, and slate-500 (`#64748b`) metadata labels.
+- **Distinct Role & Department Identities** (strictly non-monochrome / anti-uni-color):
+  - 🎓 **Student / Dave**: Soft Sky Blue (`#f0f9ff` bg, `#bae6fd` border, `#0284c7` text, `#0369a1` accent)
+  - 👩‍🎓 **Freshman Enrollee / Ella**: Soft Lilac Rose (`#fdf4ff` bg, `#f5d0fe` border, `#7c3aed` text, `#a21caf` accent)
+  - 👨‍🏫 **Faculty / Dr. Yared**: Soft Mint Emerald (`#ecfdf5` bg, `#a7f3d0` border, `#059669` text, `#047857` accent)
+  - 🛡️ **Dean & Registrar / Admin**: Soft Warm Amber-Gold (`#fffbeb` bg, `#fde68a` border, `#d97706` text, `#b45309` accent)
+  - 🏛️ **Primary Brand & CTAs**: Academic Royal Sapphire & Cobalt gradient (`linear-gradient(135deg, #1d4ed8, #2563eb)`).
 
 ---
 
 ## Interactive Demo Testing
 
-Just like modern fintech and SaaS applications, Campus Hub includes **1-click interactive demo testing**:
+Campus Hub includes turnkey, 1-click interactive demo testing inspired by modern SaaS platforms:
 
-1. **Landing Page Quick Demo Pills**:
-   - 🎓 **Student Demo**: `student.dave` / `student123` (Dave Daniel • Computer Science • 3.80 GPA)
-   - 👨‍🏫 **Faculty Demo**: `teacher.yada` / `teacher123` (Dr. Yared Assefa • Computer Science Faculty)
-   - 🛡️ **Admin / Dean Demo**: `admin` / `admin123` (Registrar & Dean Administrator)
-   - 👩‍🎓 **Registration Tester**: `student.ela` / `student123` (Ella Smith • Software Engineering • Pending Registration)
+### 1. Gatekeeper Sign-In Quick-Pills
+The Sign-In portal loads with clean, empty inputs for manual login, and features 4 pastel persona cards that automatically populate credentials with 1 click:
 
-2. **In-App Interactive Sandbox Switcher**:
-   When exploring the portal, a top bar allows instant switching between Student, Faculty, and Admin roles with 1 click without logging out and re-typing credentials. This lets evaluators test the complete academic lifecycle in seconds:
-   - **Student submits course request** ➔ **Admin approves** ➔ **Faculty submits grade** ➔ **Student views updated GPA & transcript**.
+| Persona | Role | Credentials | Starting State & Purpose |
+| :--- | :--- | :--- | :--- |
+| 🎓 **Dave Daniel** | Student | `student.dave` / `student123` | **3.80 GPA • Enrolled**: View completed course transcripts, GPA card, and allocated dormitory room. |
+| 👩‍🎓 **Ella Smith** | Freshman | `student.ela` / `student123` | **Pending Registration**: Test the student-to-admin approval flow and course request review. |
+| 👨‍🏫 **Dr. Yared Assefa** | Faculty | `teacher.yada` / `teacher123` | **Computing Faculty**: View class rosters, submit numerical marks (0–100), and initiate grade audits. |
+| 🛡️ **Dean Administrator** | Admin / Registrar | `admin` / `admin123` | **System Registrar**: 1-click approve/reject registrations, manage semesters, sections, dorms, and course assignments. |
 
-3. **Automated Idempotent Seeding**:
-   ```bash
-   python manage.py seed_demo_data
-   ```
-   Synchronizes 4 departments, 2 semesters, 8 courses, class sections, dormitory allocations, teacher assignments, and demo accounts with one command.
+### 2. In-App Interactive Sandbox Ribbon
+When signed into the portal, a persistent multi-color sandbox bar allows evaluators to toggle between Student, Faculty, and Admin roles in 1 click without logging out:
+$$\text{Student Submits Request} \longrightarrow \text{Admin Approves Registration} \longrightarrow \text{Teacher Submits Grade} \longrightarrow \text{Student Views GPA/Standing}$$
+
+### 3. Automated Idempotent Seeding
+```bash
+python manage.py seed_demo_data
+```
+Synchronizes 4 academic departments, 2 semesters, 10 catalog courses, class sections, dormitory allocations, faculty assignments, and all 4 demo personas in a single command.
 
 ---
 
-## Landing Page & Live GPA Tool
+## Architecture & System Design
 
-When visitors arrive at the platform, they are greeted by a modern, responsive landing page featuring:
-- **Interactive Academic Flow Stepper**: Visual 5-step walkthrough of university operations.
-- **Role Experience Portals**: Tabbed breakdown of Student, Teacher, and Administrator capabilities with direct test launches.
-- **Live GPA & Standing Calculator**: An interactive sandbox slider that converts numerical marks (0–100) into letter grades, grade points (4.0 scale), quality weights, and calculated academic standing (Active, Probation, or Dismissed).
+Campus Hub employs a decoupled Client-Server architecture with strict role-based separation:
+
+```
+┌────────────────────────────────────────────────────────┐
+│                   React 18 Frontend                    │
+│   (Multi-Color Light UI • SPA Router • Live GPA Tool)  │
+└───────────────────────────┬────────────────────────────┘
+                            │ HTTPS / JWT Bearer
+┌───────────────────────────▼────────────────────────────┐
+│              Django REST Framework (Backend)           │
+│   (Gunicorn WSGI • SimpleJWT Auth • WhiteNoise Static) │
+└─────────────┬────────────────────────────┬─────────────┘
+              │ Database Transactions      │
+┌─────────────▼───────────────┐ ┌──────────▼─────────────┐
+│  PostgreSQL (Production)    │ │   SQLite3 (Local Dev)  │
+└─────────────────────────────┘ └────────────────────────┘
+```
+
+### Entity Relationship Model
+
+```mermaid
+erDiagram
+    CustomUser ||--o{ Registration : submits
+    CustomUser ||--o{ Enrollment : takes
+    CustomUser ||--o{ CourseAssignment : teaches
+    CustomUser ||--o{ DormitoryAssignment : assigned_to
+    CustomUser ||--o{ AcademicStatus : earns
+
+    Department ||--o{ Course : offers
+    Semester ||--o{ Registration : belongs_to
+    Semester ||--o{ CourseAssignment : schedules
+
+    Registration ||--|{ Enrollment : creates_atomic
+    Course ||--o{ Enrollment : contains
+    Enrollment ||--o| GradeSubmission : receives
+
+    Section ||--o{ SectionAssignment : groups
+    CustomUser ||--o{ SectionAssignment : placed_in
+    Dormitory ||--o{ DormitoryAssignment : houses
+```
 
 ---
 
@@ -183,19 +248,19 @@ campus-hub/
 **1. Clone the repository**
 
 ```bash
-git clone https://github.com/biniyamgirma-dev/campus-hub.git
+git clone https://github.com/devbiniyam/campus-hub.git
 cd campus-hub
 ```
 
 **2. Create and activate a virtual environment**
 
 ```bash
-# Windows
+# Windows (PowerShell)
 python -m venv .venv
 .venv\Scripts\activate
 
 # macOS / Linux
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 ```
 
@@ -219,7 +284,7 @@ python manage.py seed_demo_data
 python manage.py runserver
 ```
 
-The API will be available at `http://localhost:8000/api/`
+The REST API will be live at `http://127.0.0.1:8000/api/`
 
 ---
 
@@ -237,149 +302,202 @@ cd Frontend
 npm install
 ```
 
-**3. Start the React app**
+**3. Start the React development server**
 
 ```bash
 npm start
 ```
 
-The app will open at `http://localhost:3000` with the landing page and 1-click demo buttons.
+The web application will open at `http://localhost:3000` with the landing page, demo gateway, and live sandbox switcher.
 
 ---
 
 ### Running Automated Tests
 
-Run the full backend test suite to verify JWT authentication, course registrations, grade calculations, and demo seeding:
+Run the comprehensive Django REST Framework test suite (verifying authentication, registrations, permissions, and seeding):
 
 ```bash
 cd Backend/backend
 python manage.py test api
 ```
 
----
-
-## Cloud Deployment Guide
-
-### Render Deployment (Backend + PostgreSQL)
-
-A complete `render.yaml` Blueprint is included in the project root:
-
-1. Push your repository to GitHub.
-2. In the Render Dashboard, click **New +** ➔ **Blueprint**.
-3. Select your repository. Render will automatically provision:
-   - **PostgreSQL Database** (`campus-hub-db`)
-   - **Python Web Service** (`campus-hub-backend`)
-4. The service runs `build.sh` automatically:
-   - Installs dependencies from `requirements.txt`
-   - Compiles static assets via Whitenoise
-   - Executes database migrations
-   - Seeds initial demo accounts and academic catalog
-
-### Vercel Deployment (Frontend)
-
-1. Connect your repository in Vercel.
-2. Set **Root Directory** to `Frontend`.
-3. Add the environment variable:
-   ```
-   REACT_APP_API_BASE=https://your-campus-hub-backend.onrender.com/api
-   ```
-4. Click **Deploy**. Vercel uses `vercel.json` to handle all client-side routing.
-
----
-
-## API Reference
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/login/` | Login — returns JWT access + refresh tokens |
-| GET | `/api/users/me/` | Get current user profile |
-| GET/POST | `/api/users/` | List or create users (admin only) |
-| GET/POST | `/api/semesters/` | List or create semesters |
-| GET/POST | `/api/departments/` | List or create departments |
-| GET/POST | `/api/courses/` | List or create courses |
-| GET/POST | `/api/course-assignments/` | Assign teachers to courses |
-| GET/POST | `/api/registrations/` | Student registration requests |
-| POST | `/api/registrations/{id}/approve/` | Admin approves registration |
-| POST | `/api/registrations/{id}/reject/` | Admin rejects registration |
-| GET/POST | `/api/enrollments/` | Course enrollments |
-| GET/POST | `/api/grade-submissions/` | Teacher grade submission |
-| GET/POST | `/api/grade-change-requests/` | Grade change requests |
-| POST | `/api/grade-change-requests/{id}/approve/` | Admin approves grade change |
-| GET/POST | `/api/sections/` | Sections management |
-| GET/POST | `/api/section-assignments/` | Assign students to sections |
-| GET/POST | `/api/academic-status/` | Student GPA and academic standing |
-| GET/POST | `/api/dormitories/` | Dormitory rooms |
-| GET/POST | `/api/dormitory-assignments/` | Assign students to dorms |
-
----
-
-## Role-Based Access
-
-| Feature | Student | Teacher | Admin |
-|---------|---------|---------|-------|
-| View own dashboard | ✅ | ✅ | ✅ |
-| Register for courses | ✅ | ❌ | ❌ |
-| View own grades | ✅ | ❌ | ❌ |
-| Submit grades | ❌ | ✅ | ❌ |
-| Request grade change | ❌ | ✅ | ❌ |
-| View student standing | ❌ | ✅ | ❌ |
-| Approve registrations | ❌ | ❌ | ✅ |
-| Approve grade changes | ❌ | ❌ | ✅ |
-| Manage users | ❌ | ❌ | ✅ |
-| Manage semesters | ❌ | ❌ | ✅ |
-| Manage sections | ❌ | ❌ | ✅ |
-| Manage dormitories | ❌ | ❌ | ✅ |
-| Assign teachers to courses | ❌ | ❌ | ✅ |
-| Browse courses | ✅ | ✅ | ✅ |
-| Edit own profile | ✅ | ✅ | ✅ |
-
----
-
-## Academic Flow
-
+Expected result:
 ```
-1. Admin creates semester and activates it
-        ↓
-2. Admin creates departments, courses, and sections
-        ↓
-3. Admin creates student and teacher accounts
-        ↓
-4. Admin assigns teachers to courses
-        ↓
-5. Student submits a registration request (selects courses)
-        ↓
-6. Admin approves the registration
-        ↓
-7. Enrollments are created automatically
-        ↓
-8. Teacher submits marks → letter grades calculated automatically
-        ↓
-9. GPA and academic standing updated automatically
+Ran 6 tests in ~15s
+OK
 ```
 
-**Grade scale:**
+---
 
-| Mark | Grade | Points |
-|------|-------|--------|
-| 90–100 | A+ | 4.0 |
-| 85–89 | A | 4.0 |
-| 80–84 | A- | 3.75 |
-| 75–79 | B+ | 3.5 |
-| 70–74 | B | 3.0 |
-| 65–69 | B- | 2.75 |
-| 60–64 | C+ | 2.5 |
-| 50–59 | C | 2.0 |
-| 45–49 | C- | 1.75 |
-| 40–44 | D | 1.0 |
-| 0–39 | F | 0.0 |
+## 🚀 Cloud Deployment Guide ("Deploy as New")
 
-**Academic standing rules:**
-- GPA ≥ 2.00 → **Active**
-- GPA 1.75–1.99 → **Probation**
-- GPA < 1.75 → **Dismissed** (blocked from registering)
+Deploying Campus Hub to production as a brand-new instance takes under 3 minutes using the included infrastructure blueprints.
+
+### Option A: 1-Click Render Blueprint (Full-Stack + PostgreSQL)
+
+The included root `render.yaml` orchestrates the managed PostgreSQL database, Django backend, and React static frontend automatically.
+
+1. Fork or push this repository to your GitHub account: `https://github.com/devbiniyam/campus-hub`.
+2. Log into the [Render Dashboard](https://dashboard.render.com/).
+3. Click **New +** ➔ **Blueprint**.
+4. Connect your GitHub repository.
+5. Render will automatically detect `render.yaml` and provision:
+   - 🐘 **Managed PostgreSQL Database** (`campus-hub-db`)
+   - 🐍 **Python Web Service** (`campus-hub-backend`)
+     - Build: `bash ./build.sh` (installs packages, runs migrations, collects static files via WhiteNoise, and seeds all 4 demo accounts)
+     - Start: `gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT`
+   - ⚛️ **Static Site** (`campus-hub-frontend`)
+     - Root: `Frontend`
+     - Build: `npm install && npm run build`
+     - Publish: `./build`
+6. Click **Apply**. Once built, your academic portal is live with database persistence and pre-seeded demo accounts!
 
 ---
 
-## Author
+### Option B: Hybrid Cloud (Render Backend + Vercel Frontend)
 
-Built by **Biniyam Girma**
+#### 1. Backend on Render:
+- Create a **PostgreSQL Database** on Render (`campus-hub-db`).
+- Create a **Web Service** pointing to your repository:
+  - **Root Directory**: `Backend/backend`
+  - **Runtime**: `Python`
+  - **Build Command**: `bash ./build.sh`
+  - **Start Command**: `gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT`
+  - **Environment Variables**:
+    - `DATABASE_URL`: *(Connection string from your Render PostgreSQL database)*
+    - `SECRET_KEY`: *(Generate a secure random string)*
+    - `DEBUG`: `False`
+    - `ALLOWED_HOSTS`: `.onrender.com,localhost,127.0.0.1,.vercel.app`
+    - `CORS_ALLOW_ALL_ORIGINS`: `True`
+
+#### 2. Frontend on Vercel:
+- In the [Vercel Dashboard](https://vercel.com/), click **Add New Project** and import the repository.
+- **Framework Preset**: `Create React App`
+- **Root Directory**: Click edit and select `Frontend`
+- **Environment Variables**:
+  - `REACT_APP_API_BASE`: `https://<your-backend-service>.onrender.com/api`
+- Click **Deploy**. Vercel will build the frontend with SPA rewrite rules configured in `Frontend/vercel.json`.
+
+---
+
+### Environment Variables Matrix
+
+#### Backend (`Backend/backend/.env`)
+
+| Variable | Description | Production Default | Local Default |
+| :--- | :--- | :--- | :--- |
+| `SECRET_KEY` | Django cryptographic signing key | Strong random string | Insecure dev key |
+| `DEBUG` | Enable debug mode | `False` | `True` |
+| `DATABASE_URL` | PostgreSQL connection URI | `postgres://user:pass@host:5432/db` | None *(uses SQLite)* |
+| `ALLOWED_HOSTS` | Comma-separated allowed hostnames | `.onrender.com,.vercel.app` | `*,localhost,127.0.0.1` |
+| `CORS_ALLOW_ALL_ORIGINS`| Allow cross-origin requests | `True` *(or restrict to domain)* | `True` |
+
+#### Frontend (`Frontend/.env`)
+
+| Variable | Description | Production Default | Local Default |
+| :--- | :--- | :--- | :--- |
+| `REACT_APP_API_BASE` | Base URL for REST API endpoints | `https://your-backend.onrender.com/api` | `http://127.0.0.1:8000/api` |
+
+---
+
+## API Reference & Security
+
+All private endpoints require a JSON Web Token (JWT) passed in the `Authorization` header:
+```
+Authorization: Bearer <your-access-token>
+```
+
+### 1. Authentication Flow
+```bash
+# 1. Obtain JWT Access & Refresh Tokens
+curl -X POST http://127.0.0.1:8000/api/auth/login/ \
+  -H "Content-Type: application/json" \
+  -d '{"username": "student.dave", "password": "student123"}'
+
+# Response:
+# {"refresh": "...", "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."}
+
+# 2. Fetch Authenticated User Profile
+curl http://127.0.0.1:8000/api/users/me/ \
+  -H "Authorization: Bearer <access_token>"
+```
+
+### 2. Core REST Endpoints
+
+| Method | Endpoint | Access Level | Description |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/auth/login/` | Public | Authenticates credentials and returns JWT token pair |
+| `GET` | `/api/users/me/` | Authenticated | Retrieves profile of currently authenticated user |
+| `GET` / `POST` | `/api/users/` | Admin Only | List, filter, or create new university users |
+| `GET` / `POST` | `/api/semesters/` | Auth / Admin | View all semesters; create or activate new term |
+| `GET` / `POST` | `/api/departments/` | Auth / Admin | University academic departments catalog |
+| `GET` / `POST` | `/api/courses/` | Public / Admin | Browse active courses (public) or manage catalog (admin) |
+| `GET` / `POST` | `/api/course-assignments/`| Faculty / Admin| Assign teachers to course sections per semester |
+| `GET` / `POST` | `/api/registrations/` | Student / Admin | Student submits course registration request |
+| `POST` | `/api/registrations/{id}/approve/` | Admin Only | Atomically approves request and creates enrollments |
+| `POST` | `/api/registrations/{id}/reject/` | Admin Only | Rejects request with audit remarks |
+| `GET` | `/api/enrollments/` | Role-filtered | View course enrollments by student or teaching faculty |
+| `POST` | `/api/grade-submissions/` | Faculty Only | Submit marks (0–100); auto-calculates letter grade |
+| `GET` / `POST` | `/api/grade-change-requests/` | Faculty / Admin | Request audit modification on already-submitted grades |
+| `POST` | `/api/grade-change-requests/{id}/approve/` | Admin Only | Approves audit and automatically updates student GPA |
+| `GET` / `POST` | `/api/sections/` | Auth / Admin | Lecture and lab section management |
+| `GET` / `POST` | `/api/section-assignments/` | Auth / Admin | Student section cohort placements |
+| `GET` | `/api/academic-status/` | Role-filtered | View semester GPA, cumulative CGPA, and standing |
+| `GET` / `POST` | `/api/dormitories/` | Auth / Admin | View dormitory blocks and room capacities |
+| `GET` / `POST` | `/api/dormitory-assignments/` | Auth / Admin | Student residential dormitory allocations |
+
+---
+
+## Role-Based Access Control (RBAC)
+
+Campus Hub enforces granular, role-based permissions at the database query level:
+
+| Feature / Capability | Student | Faculty | Administrator |
+| :--- | :---: | :---: | :---: |
+| Access Personalized Dashboard | ✅ | ✅ | ✅ |
+| Submit Course Registration | ✅ | ❌ | ❌ |
+| View Transcript & Cumulative GPA | ✅ | ❌ | ❌ |
+| View Assigned Teaching Rosters | ❌ | ✅ | ❌ |
+| Submit Student Marks (0–100) | ❌ | ✅ | ❌ |
+| Initiate Grade Revision Audit | ❌ | ✅ | ❌ |
+| Approve / Reject Registrations | ❌ | ❌ | ✅ |
+| Approve Grade Revisions | ❌ | ❌ | ✅ |
+| Manage Departments & Catalog | ❌ | ❌ | ✅ |
+| Allocate Dormitories & Sections | ❌ | ❌ | ✅ |
+| User Provisioning & Deactivation | ❌ | ❌ | ✅ |
+
+---
+
+## Academic Rules Engine
+
+### Grading Scale & Quality Points
+Marks submitted between 0 and 100 are automatically converted into standard letter grades and quality points:
+
+| Percentage Range | Letter Grade | Grade Points (4.0 Scale) | Classification |
+| :--- | :---: | :---: | :--- |
+| **90% – 100%** | `A+` | **4.00** | Excellent / First Class Honours |
+| **85% – 89%** | `A` | **4.00** | High Distinction |
+| **80% – 84%** | `A-` | **3.75** | Distinction |
+| **75% – 79%** | `B+` | **3.50** | Very Good |
+| **70% – 74%** | `B` | **3.00** | Good |
+| **65% – 69%** | `B-` | **2.75** | Satisfactory |
+| **60% – 64%** | `C+` | **2.50** | Average |
+| **50% – 59%** | `C` | **2.00** | Pass |
+| **45% – 49%** | `C-` | **1.75** | Marginal Failure |
+| **40% – 44%** | `D` | **1.00** | Minimum Pass |
+| **0% – 39%** | `F` | **0.00** | Fail |
+
+### Academic Standing Policies
+Calculated at the end of each completed semester:
+- **Active / Good Standing**: $\text{GPA} \ge 2.00$
+- **Academic Probation**: $1.75 \le \text{GPA} < 2.00$ *(Requires advisor review)*
+- **Academic Dismissal**: $\text{GPA} < 1.75$ *(Course registration blocked)*
+
+---
+
+## 📄 License & Author
+
+- **Author**: [Biniyam Girma](https://github.com/devbiniyam)
+- **Repository**: [https://github.com/devbiniyam/campus-hub](https://github.com/devbiniyam/campus-hub)
+- **License**: MIT License — open for academic, commercial, and research use.
+
