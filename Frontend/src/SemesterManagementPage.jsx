@@ -8,69 +8,59 @@ const S = {
     justifyContent: "space-between", marginBottom: "1.25rem",
     flexWrap: "wrap", gap: "10px",
   },
-  title: { fontSize: "15px", fontWeight: "600", color: "#f0f0f5" },
+  title: { fontSize: "15px", fontWeight: "700", color: "#0f172a" },
   addBtn: {
     fontSize: "13px", padding: "8px 16px", borderRadius: "10px",
-    border: "none", background: "linear-gradient(135deg,#6366f1,#8b5cf6)",
+    border: "none", background: "linear-gradient(135deg, #1d4ed8, #2563eb)",
     color: "#fff", cursor: "pointer", fontFamily: "'DM Sans', sans-serif",
-    fontWeight: "600",
+    fontWeight: "700", boxShadow: "0 2px 8px rgba(37, 99, 235, 0.25)",
   },
   tableCard: {
-    background: "#1a1d27", border: "1px solid #2a2d3a",
-    borderRadius: "12px", overflow: "hidden", marginBottom: "1.25rem",
+    background: "#ffffff", border: "1px solid #e2e8f0",
+    borderRadius: "14px", overflow: "hidden", marginBottom: "1.25rem",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.04)",
   },
   tableHeader: {
-    display: "grid", gridTemplateColumns: "1fr 80px 110px 110px 80px 120px",
-    padding: "8px 14px", borderBottom: "1px solid #2a2d3a",
-    fontSize: "11px", color: "#4a4e63", fontWeight: "600",
+    display: "grid", gridTemplateColumns: "1fr 80px 110px 110px 80px 140px",
+    padding: "12px 14px", borderBottom: "1px solid #e2e8f0", background: "#f8fafc",
+    fontSize: "11px", color: "#475569", fontWeight: "700", textTransform: "uppercase",
   },
   tableRow: {
-    display: "grid", gridTemplateColumns: "1fr 80px 110px 110px 80px 120px",
-    padding: "10px 14px", borderBottom: "1px solid #1e2130",
-    fontSize: "13px", color: "#c8cad8", alignItems: "center",
+    display: "grid", gridTemplateColumns: "1fr 80px 110px 110px 80px 140px",
+    padding: "12px 14px", borderBottom: "1px solid #f1f5f9",
+    fontSize: "13px", color: "#1e293b", alignItems: "center",
   },
   activeBadge: {
-    fontSize: "11px", padding: "2px 8px", borderRadius: "20px",
-    background: "#1a2e1a", border: "1px solid #2a5c2a", color: "#4ade80",
+    fontSize: "11px", padding: "3px 10px", borderRadius: "20px",
+    background: "#ecfdf5", border: "1px solid #a7f3d0", color: "#059669", fontWeight: "700",
   },
   inactiveBadge: {
-    fontSize: "11px", padding: "2px 8px", borderRadius: "20px",
-    background: "#1e2130", border: "1px solid #2a2d3a", color: "#6b6f85",
+    fontSize: "11px", padding: "3px 10px", borderRadius: "20px",
+    background: "#f1f5f9", border: "1px solid #cbd5e1", color: "#64748b", fontWeight: "600",
   },
   actionBtn: {
-    fontSize: "11px", padding: "3px 8px", borderRadius: "6px",
-    border: "1px solid", cursor: "pointer", fontWeight: "500",
+    fontSize: "11px", padding: "5px 10px", borderRadius: "6px",
+    border: "1px solid", cursor: "pointer", fontWeight: "700",
     background: "transparent", fontFamily: "'DM Sans', sans-serif",
     marginRight: "4px",
   },
   modal: {
-  position: "fixed",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  background: "rgba(0,0,0,0.7)",
-  display: "flex",
-  alignItems: "flex-start",
-  justifyContent: "center",
-  overflowY: "auto",
-  zIndex: 200,
-  padding: "0",
-},
+    position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+    background: "rgba(15, 23, 42, 0.45)", backdropFilter: "blur(4px)",
+    display: "flex", alignItems: "flex-start", justifyContent: "center",
+    overflowY: "auto", zIndex: 200, padding: "0",
+  },
   modalCard: {
-  background: "#1a1d27",
-  border: "1px solid #2a2d3a",
-  borderRadius: "16px",
-  padding: "1.5rem",
-  width: "100%",
-  maxWidth: "480px",
-  margin: "20px auto",
-},
-  modalTitle: { fontSize: "16px", fontWeight: "700", color: "#f0f0f5", marginBottom: "1.25rem" },
-  label: { fontSize: "12px", color: "#9ca0b8", marginBottom: "4px", display: "block" },
+    background: "#ffffff", border: "1px solid #e2e8f0",
+    borderRadius: "16px", padding: "1.5rem", width: "100%",
+    maxWidth: "480px", margin: "20px auto",
+    boxShadow: "0 20px 50px rgba(0,0,0,0.15)",
+  },
+  modalTitle: { fontSize: "16px", fontWeight: "800", color: "#0f172a", marginBottom: "1.25rem" },
+  label: { fontSize: "12px", color: "#475569", marginBottom: "4px", display: "block", fontWeight: "700" },
   input: {
-    background: "#0f1117", border: "1px solid #2a2d3a", borderRadius: "8px",
-    padding: "8px 12px", color: "#f0f0f5", fontSize: "13px", width: "100%",
+    background: "#ffffff", border: "1px solid #cbd5e1", borderRadius: "8px",
+    padding: "8px 12px", color: "#0f172a", fontSize: "13px", width: "100%",
     fontFamily: "'DM Sans', sans-serif", outline: "none",
     boxSizing: "border-box", marginBottom: "12px",
   },
@@ -78,30 +68,31 @@ const S = {
     display: "flex", alignItems: "center", gap: "8px",
     marginBottom: "16px", cursor: "pointer",
   },
-  checkLabel: { fontSize: "13px", color: "#c8cad8" },
+  checkLabel: { fontSize: "13px", color: "#334155", fontWeight: "600" },
   modalBtns: { display: "flex", gap: "8px", justifyContent: "flex-end" },
   cancelBtn: {
     fontSize: "13px", padding: "8px 16px", borderRadius: "8px",
-    border: "1px solid #2a2d3a", color: "#9ca0b8",
-    background: "transparent", cursor: "pointer",
-    fontFamily: "'DM Sans', sans-serif",
+    border: "1px solid #cbd5e1", color: "#64748b",
+    background: "#ffffff", cursor: "pointer",
+    fontFamily: "'DM Sans', sans-serif", fontWeight: "600",
   },
   saveBtn: {
     fontSize: "13px", padding: "8px 20px", borderRadius: "8px",
     border: "none", color: "#fff",
-    background: "linear-gradient(135deg,#6366f1,#8b5cf6)",
-    cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "600",
+    background: "linear-gradient(135deg, #1d4ed8, #2563eb)",
+    cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "700",
+    boxShadow: "0 2px 8px rgba(37, 99, 235, 0.25)",
   },
   error: {
-    background: "#2d1a1a", border: "1px solid #5c2a2a", borderRadius: "8px",
-    padding: "8px 12px", fontSize: "12px", color: "#f87171", marginBottom: "12px",
+    background: "#fef2f2", border: "1px solid #fecaca", borderRadius: "8px",
+    padding: "8px 12px", fontSize: "12px", color: "#dc2626", marginBottom: "12px", fontWeight: "600",
   },
   toast: {
     position: "fixed", bottom: "20px", right: "20px",
-    borderRadius: "10px", padding: "10px 16px", fontSize: "13px", zIndex: 300,
+    borderRadius: "10px", padding: "10px 16px", fontSize: "13px", zIndex: 300, fontWeight: "700",
   },
-  empty: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#4a4e63" },
-  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#6b6f85" },
+  empty: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
+  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
 };
 
 const EMPTY_FORM = { name: "", year: "", start_date: "", end_date: "", is_active: false };
@@ -259,27 +250,27 @@ export default function SemesterManagementPage() {
           ? <div style={S.empty}>No semesters yet. Add one to get started.</div>
           : semesters.map(s => (
               <div key={s.id} style={S.tableRow}>
-                <span style={{ color: "#e2e4f0", fontWeight: "500" }}>{s.name}</span>
-                <span>{s.year}</span>
-                <span style={{ color: "#9ca0b8" }}>{s.start_date}</span>
-                <span style={{ color: "#9ca0b8" }}>{s.end_date}</span>
+                <span style={{ color: "#0f172a", fontWeight: "600" }}>{s.name}</span>
+                <span style={{ color: "#0284c7", fontWeight: "700" }}>{s.year}</span>
+                <span style={{ color: "#64748b" }}>{s.start_date}</span>
+                <span style={{ color: "#64748b" }}>{s.end_date}</span>
                 <span>
                   <span style={s.is_active ? S.activeBadge : S.inactiveBadge}>
                     {s.is_active ? "Active" : "Inactive"}
                   </span>
                 </span>
-                <span style={{ display: "flex", gap: "4px", flexWrap: "wrap" }}>
+                <span style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
                   {!s.is_active && (
-                    <button style={{ ...S.actionBtn, borderColor: "#2a5c2a", color: "#4ade80" }}
+                    <button style={{ ...S.actionBtn, borderColor: "#a7f3d0", color: "#059669", background: "#ecfdf5" }}
                       onClick={() => handleActivate(s)}>
                       Activate
                     </button>
                   )}
-                  <button style={{ ...S.actionBtn, borderColor: "#2a3a5a", color: "#60a5fa" }}
+                  <button style={{ ...S.actionBtn, borderColor: "#bae6fd", color: "#0284c7", background: "#f0f9ff" }}
                     onClick={() => openEdit(s)}>
                     Edit
                   </button>
-                  <button style={{ ...S.actionBtn, borderColor: "#5c2a2a", color: "#f87171" }}
+                  <button style={{ ...S.actionBtn, borderColor: "#fecaca", color: "#dc2626", background: "#fef2f2" }}
                     disabled={deleting === s.id}
                     onClick={() => handleDelete(s.id)}>
                     {deleting === s.id ? "…" : "Delete"}

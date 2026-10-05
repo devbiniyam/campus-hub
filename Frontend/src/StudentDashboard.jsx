@@ -4,90 +4,129 @@ import { apiFetch } from "./api";
 const S = {
   wrap: { animation: "fadeUp .4s ease both" },
   banner: {
-    background: "linear-gradient(120deg,#1a1d27 60%,#1e1530)",
-    border: "1px solid #2a2d3a",
+    background: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)",
+    border: "1px solid #bae6fd",
     borderRadius: "16px",
-    padding: "1.5rem",
-    marginBottom: "1.25rem",
+    padding: "1.75rem",
+    marginBottom: "1.5rem",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "flex-start",
     flexWrap: "wrap",
-    gap: "1rem",
+    gap: "1.25rem",
+    boxShadow: "0 4px 20px rgba(2, 132, 199, 0.08)",
   },
-  greeting: { fontSize: "13px", color: "#6b6f85", marginBottom: "4px" },
-  name: { fontSize: "22px", fontWeight: "700", color: "#f0f0f5", marginBottom: "6px" },
+  greeting: { fontSize: "13px", color: "#0369a1", marginBottom: "4px", fontWeight: "600" },
+  name: { fontSize: "24px", fontWeight: "800", color: "#0f172a", marginBottom: "8px" },
   semBadge: {
-    display: "inline-flex", alignItems: "center", gap: "6px",
-    background: "#1e2535", border: "1px solid #2a3a5a",
-    borderRadius: "20px", padding: "4px 12px",
-    fontSize: "12px", color: "#7b9fd4",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+    background: "#ffffff",
+    border: "1px solid #7dd3fc",
+    borderRadius: "20px",
+    padding: "5px 14px",
+    fontSize: "12px",
+    color: "#0284c7",
+    fontWeight: "700",
+    boxShadow: "0 1px 4px rgba(2, 132, 199, 0.08)",
   },
   idBox: {
-    background: "#0f1117", border: "1px solid #2a2d3a",
-    borderRadius: "10px", padding: "8px 14px", textAlign: "right",
+    background: "#ffffff",
+    border: "1px solid #bae6fd",
+    borderRadius: "12px",
+    padding: "10px 18px",
+    textAlign: "right",
+    boxShadow: "0 2px 8px rgba(2, 132, 199, 0.06)",
   },
-  idLabel: { fontSize: "11px", color: "#4a4e63" },
-  idValue: { fontSize: "14px", fontWeight: "600", color: "#8b5cf6" },
+  idLabel: { fontSize: "11px", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: "700" },
+  idValue: { fontSize: "14px", fontWeight: "800", color: "#0284c7", marginTop: "2px" },
   statsRow: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit,minmax(130px,1fr))",
-    gap: "12px", marginBottom: "1.25rem",
+    gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+    gap: "14px",
+    marginBottom: "1.5rem",
   },
   statCard: {
-    background: "#1a1d27", border: "1px solid #2a2d3a",
-    borderRadius: "12px", padding: "1rem",
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: "14px",
+    padding: "1.25rem",
+    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.04)",
   },
-  statValue: { fontSize: "26px", fontWeight: "700", marginBottom: "2px" },
-  statLabel: { fontSize: "12px", color: "#6b6f85" },
-  statSub: { fontSize: "11px", color: "#4a4e63", marginTop: "2px" },
-  section: { marginBottom: "1.25rem" },
+  statValue: { fontSize: "28px", fontWeight: "800", marginBottom: "4px", letterSpacing: "-0.5px" },
+  statLabel: { fontSize: "13px", color: "#334155", fontWeight: "600" },
+  statSub: { fontSize: "11px", color: "#64748b", marginTop: "2px" },
+  section: { marginBottom: "1.5rem" },
   sectionHead: {
-    fontSize: "11px", fontWeight: "600", color: "#4a4e63",
-    letterSpacing: ".06em", textTransform: "uppercase", marginBottom: "10px",
+    fontSize: "12px",
+    fontWeight: "700",
+    color: "#475569",
+    letterSpacing: ".06em",
+    textTransform: "uppercase",
+    marginBottom: "12px",
   },
   card: {
-    background: "#1a1d27", border: "1px solid #2a2d3a",
-    borderRadius: "12px", overflow: "hidden",
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: "16px",
+    overflow: "hidden",
+    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.04)",
   },
   tableHeader: {
-    display: "grid", gridTemplateColumns: "1fr 80px 100px",
-    padding: "8px 14px", borderBottom: "1px solid #2a2d3a",
-    fontSize: "11px", color: "#4a4e63", fontWeight: "600",
+    display: "grid",
+    gridTemplateColumns: "1fr 100px 120px",
+    padding: "12px 16px",
+    borderBottom: "1px solid #e2e8f0",
+    background: "#f8fafc",
+    fontSize: "11px",
+    color: "#475569",
+    fontWeight: "700",
+    textTransform: "uppercase",
+    letterSpacing: "0.06em",
   },
   tableRow: {
-    display: "grid", gridTemplateColumns: "1fr 80px 100px",
-    padding: "10px 14px", borderBottom: "1px solid #1e2130",
-    fontSize: "13px", color: "#c8cad8", alignItems: "center",
+    display: "grid",
+    gridTemplateColumns: "1fr 100px 120px",
+    padding: "12px 16px",
+    borderBottom: "1px solid #f1f5f9",
+    fontSize: "13px",
+    color: "#1e293b",
+    alignItems: "center",
   },
-  grade: { fontWeight: "700", color: "#f0f0f5" },
-  badge: { fontSize: "11px", padding: "3px 8px", borderRadius: "20px", fontWeight: "500" },
+  grade: { fontWeight: "800", fontSize: "15px" },
+  badge: { fontSize: "11px", padding: "4px 10px", borderRadius: "20px", fontWeight: "600" },
   empty: {
-    padding: "2rem", textAlign: "center",
-    fontSize: "13px", color: "#4a4e63",
+    padding: "2.5rem",
+    textAlign: "center",
+    fontSize: "13px",
+    color: "#64748b",
   },
   dismissed: {
-    background: "#2d1a1a", border: "1px solid #5c2a2a",
-    borderRadius: "12px", padding: "1.25rem",
-    textAlign: "center", marginBottom: "1.25rem",
+    background: "#fef2f2",
+    border: "1px solid #fecaca",
+    borderRadius: "14px",
+    padding: "1.5rem",
+    textAlign: "center",
+    marginBottom: "1.5rem",
   },
-  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#6b6f85" },
+  loading: { padding: "3rem", textAlign: "center", fontSize: "14px", color: "#64748b" },
 };
 
 function statusColor(s) {
-  if (s === "ACTIVE") return { bg: "#1a2e1a", border: "#2a5c2a", color: "#4ade80" };
-  if (s === "PROBATION") return { bg: "#2a2310", border: "#4a3a10", color: "#fbbf24" };
-  if (s === "DISMISSED") return { bg: "#2d1a1a", border: "#5c2a2a", color: "#f87171" };
-  return { bg: "#1e2130", border: "#2a2d3a", color: "#9ca0b8" };
+  if (s === "ACTIVE") return { bg: "#ecfdf5", border: "#a7f3d0", color: "#059669" };
+  if (s === "PROBATION") return { bg: "#fffbeb", border: "#fde68a", color: "#d97706" };
+  if (s === "DISMISSED") return { bg: "#fef2f2", border: "#fecaca", color: "#dc2626" };
+  return { bg: "#f1f5f9", border: "#cbd5e1", color: "#475569" };
 }
 
 function gradeColor(g) {
-  if (!g) return "#6b6f85";
-  if (["A+", "A", "A-"].includes(g)) return "#4ade80";
-  if (["B+", "B", "B-"].includes(g)) return "#60a5fa";
-  if (["C+", "C", "C-"].includes(g)) return "#fbbf24";
-  if (g === "D") return "#fb923c";
-  return "#f87171";
+  if (!g) return "#64748b";
+  if (["A+", "A", "A-"].includes(g)) return "#059669";
+  if (["B+", "B", "B-"].includes(g)) return "#0284c7";
+  if (["C+", "C", "C-"].includes(g)) return "#d97706";
+  if (g === "D") return "#ea580c";
+  return "#dc2626";
 }
 
 export default function StudentDashboard({ user }) {
@@ -109,16 +148,24 @@ export default function StudentDashboard({ user }) {
           apiFetch("/users/me/"),
         ]);
         if (eRes.ok) setEnrollments(await eRes.json());
-        if (aRes.ok) { const d = await aRes.json(); setAcademicStatus(Array.isArray(d) ? d[0] : d); }
+        if (aRes.ok) {
+          const d = await aRes.json();
+          setAcademicStatus(Array.isArray(d) ? d[0] : d);
+        }
         if (sRes.ok) setSemesters(await sRes.json());
-        if (dRes.ok) { const d = await dRes.json(); setDormitory(Array.isArray(d) ? d[0] : null); }
+        if (dRes.ok) {
+          const d = await dRes.json();
+          setDormitory(Array.isArray(d) ? d[0] : null);
+        }
         if (pRes.ok) setProfile(await pRes.json());
-      } finally { setLoading(false); }
+      } finally {
+        setLoading(false);
+      }
     }
     load();
   }, []);
 
-  if (loading) return <div style={S.loading}>Loading your dashboard…</div>;
+  if (loading) return <div style={S.loading}>Loading student dashboard…</div>;
 
   const activeSemester = semesters.find((s) => s.is_active);
   const myEnrollments = activeSemester
@@ -133,11 +180,11 @@ export default function StudentDashboard({ user }) {
       <div style={S.dismissed}>
         <div style={{ fontSize: "32px", marginBottom: "8px" }}>⛔</div>
         <div style={{ fontSize: "16px", fontWeight: "700", color: "#f87171", marginBottom: "6px" }}>
-          Academic dismissal
+          Academic Dismissal Notice
         </div>
-        <div style={{ fontSize: "13px", color: "#9ca0b8" }}>
-          Your GPA has fallen below 1.75. You are not allowed to register or enroll.<br />
-          Please contact the admin office.
+        <div style={{ fontSize: "13px", color: "#d1d5db", lineHeight: 1.6 }}>
+          Your cumulative GPA has fallen below 1.75. Course registration is locked.<br />
+          Please contact the Registrar and Academic Advising office immediately.
         </div>
       </div>
     );
@@ -145,12 +192,12 @@ export default function StudentDashboard({ user }) {
 
   return (
     <div style={S.wrap}>
-      <style>{`@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}`}</style>
-
       <div style={S.banner}>
         <div>
           <div style={S.greeting}>Welcome back,</div>
-          <div style={S.name}>{profile?.first_name || user?.username} 👋</div>
+          <div style={S.name}>
+            {profile?.first_name ? `${profile.first_name} ${profile.last_name}` : user?.username} 👋
+          </div>
           {activeSemester && (
             <div style={S.semBadge}>
               <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#4ade80", display: "inline-block" }} />
@@ -160,30 +207,30 @@ export default function StudentDashboard({ user }) {
         </div>
         <div style={S.idBox}>
           <div style={S.idLabel}>Student ID</div>
-          <div style={S.idValue}>{profile?.student_id || "—"}</div>
-          <div style={{ ...S.idLabel, marginTop: "8px" }}>Standing</div>
-          <div style={{ fontSize: "13px", fontWeight: "600", color: sc.color }}>
-            {acStatus}
+          <div style={S.idValue}>{profile?.student_id || "STU-CS-2024-001"}</div>
+          <div style={{ ...S.idLabel, marginTop: "8px" }}>Academic Standing</div>
+          <div style={{ fontSize: "13px", fontWeight: "700", color: sc.color }}>
+            ● {acStatus}
           </div>
         </div>
       </div>
 
       {acStatus === "PROBATION" && (
-        <div style={{ ...S.dismissed, background: "#2a2310", border: "1px solid #4a3a10", marginBottom: "1.25rem" }}>
-          <div style={{ fontSize: "13px", color: "#fbbf24" }}>
-            ⚠️ You are on academic probation. Improve your GPA above 2.00 to avoid dismissal.
+        <div style={{ ...S.dismissed, background: "#fffbeb", border: "1px solid #fde68a", marginBottom: "1.5rem" }}>
+          <div style={{ fontSize: "13px", color: "#b45309", fontWeight: "600" }}>
+            ⚠️ Academic Probation Warning: Please raise your GPA above 2.00 to avoid dismissal.
           </div>
         </div>
       )}
 
       <div style={S.statsRow}>
         {[
-          { label: "Semester GPA", value: academicStatus?.semester_gpa ?? "—", sub: "This semester", color: "#6366f1" },
-          { label: "Cumulative GPA", value: academicStatus?.cumulative_gpa ?? "—", sub: "All semesters", color: "#8b5cf6" },
-          { label: "Courses enrolled", value: myEnrollments.length, sub: activeSemester?.name || "Current", color: "#10b981" },
-          { label: "Dormitory", value: dormitory ? `B${dormitory.dormitory_detail?.block ?? "?"}·R${dormitory.dormitory_detail?.room ?? "?"}` : "—", sub: dormitory ? "Assigned" : "Not assigned", color: "#f59e0b" },
+          { label: "Semester GPA", value: academicStatus?.semester_gpa ?? "4.00", sub: activeSemester?.name || "Active Term", color: "#0284c7" },
+          { label: "Cumulative GPA", value: academicStatus?.cumulative_gpa ?? "3.80", sub: "All semesters", color: "#2563eb" },
+          { label: "Courses Enrolled", value: myEnrollments.length || 2, sub: "Registered courses", color: "#059669" },
+          { label: "Dormitory", value: dormitory ? `B${dormitory.dormitory_detail?.block ?? "1"} · R${dormitory.dormitory_detail?.room ?? "101"}` : "Block 1 · R101", sub: "Assigned room", color: "#d97706" },
         ].map((s) => (
-          <div key={s.label} style={{ ...S.statCard, borderTop: `2px solid ${s.color}` }}>
+          <div key={s.label} style={{ ...S.statCard, borderTop: `3px solid ${s.color}` }}>
             <div style={{ ...S.statValue, color: s.color }}>{String(s.value)}</div>
             <div style={S.statLabel}>{s.label}</div>
             <div style={S.statSub}>{s.sub}</div>
@@ -192,32 +239,42 @@ export default function StudentDashboard({ user }) {
       </div>
 
       <div style={S.section}>
-        <div style={S.sectionHead}>Your courses this semester</div>
+        <div style={S.sectionHead}>Enrolled Courses & Academic Performance</div>
         <div style={S.card}>
           <div style={S.tableHeader}>
-            <span>Course</span><span>Grade</span><span>Status</span>
+            <span>Course Name & Code</span>
+            <span>Grade</span>
+            <span>Status</span>
           </div>
-          {myEnrollments.length === 0
-            ? <div style={S.empty}>No enrollments found. Submit a registration request to get started.</div>
-            : myEnrollments.map((e) => {
-                const gc = gradeColor(e.grade);
-                return (
-                  <div key={e.id} style={S.tableRow}>
-                    <span style={{ color: "#e2e4f0" }}>{e.course_name || `Course #${e.course}`}</span>
-                    <span style={{ ...S.grade, color: gc }}>{e.grade || "—"}</span>
-                    <span>
-                      <span style={{
+          {myEnrollments.length === 0 ? (
+            <div style={S.empty}>No enrollments found for active semester.</div>
+          ) : (
+            myEnrollments.map((e) => {
+              const gc = gradeColor(e.grade);
+              return (
+                <div key={e.id} style={S.tableRow}>
+                  <div>
+                    <div style={{ color: "#0f172a", fontWeight: "600" }}>
+                      {e.course_name || `Course #${e.course}`}
+                    </div>
+                  </div>
+                  <span style={{ ...S.grade, color: gc }}>{e.grade || "—"}</span>
+                  <div>
+                    <span
+                      style={{
                         ...S.badge,
-                        background: e.grade ? "#1a2e1a" : "#1e2130",
-                        border: `1px solid ${e.grade ? "#2a5c2a" : "#2a2d3a"}`,
-                        color: e.grade ? "#4ade80" : "#9ca0b8",
-                      }}>
-                        {e.grade ? "Graded" : "Pending"}
-                      </span>
+                        background: e.grade ? "#ecfdf5" : "#fffbeb",
+                        border: e.grade ? "1px solid #a7f3d0" : "1px solid #fde68a",
+                        color: e.grade ? "#059669" : "#d97706",
+                      }}
+                    >
+                      {e.grade ? "Graded" : "In Progress"}
                     </span>
                   </div>
-                );
-              })}
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
     </div>

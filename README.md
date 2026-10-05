@@ -2,12 +2,15 @@
 
 A full-stack university campus management system built with **Django REST Framework** and **React**. Designed to handle the complete academic lifecycle — from student registration and course enrollment to grade submission and dormitory management — with role-based access for students, teachers, and admins.
 
+Now featuring a **modern landing page**, **1-click interactive demo testing (like FeeBridge)**, an **in-app demo role switcher**, and **production cloud deployment blueprints** for Render and Vercel.
+
 ---
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [Screenshots](#screenshots)
+- [Interactive Demo Testing](#interactive-demo-testing)
+- [Landing Page & Live GPA Tool](#landing-page--live-gpa-tool)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
@@ -15,6 +18,10 @@ A full-stack university campus management system built with **Django REST Framew
   - [Prerequisites](#prerequisites)
   - [Backend Setup](#backend-setup)
   - [Frontend Setup](#frontend-setup)
+  - [Running Automated Tests](#running-automated-tests)
+- [Cloud Deployment Guide](#cloud-deployment-guide)
+  - [Render Deployment (Backend + PostgreSQL)](#render-deployment-backend--postgresql)
+  - [Vercel Deployment (Frontend)](#vercel-deployment-frontend)
 - [API Reference](#api-reference)
 - [Role-Based Access](#role-based-access)
 - [Academic Flow](#academic-flow)
@@ -24,31 +31,40 @@ A full-stack university campus management system built with **Django REST Framew
 
 ## Overview
 
-Campus Hub is a management platform that mirrors real university workflows. An admin sets up semesters, departments, and courses. Students register for courses each semester. Admins approve registrations, which creates enrollments. Teachers submit grades. Academic standing is calculated automatically based on GPA rules.
+Campus Hub is a management platform that mirrors real university workflows. An admin sets up semesters, departments, and courses. Students register for courses each semester. Admins approve registrations, which atomically creates enrollments. Teachers submit marks which automatically derive letter grades. Academic standing is calculated automatically based on GPA rules.
 
 Every piece of the system enforces business rules at the database level — not just in the frontend — making the platform robust and consistent regardless of how data enters the system.
 
 ---
 
-## Screenshots
+## Interactive Demo Testing
 
-### Login
-![Login](screenshots/login.png)
+Just like modern fintech and SaaS applications, Campus Hub includes **1-click interactive demo testing**:
 
-### Admin Dashboard
-![Admin Dashboard](screenshots/admin-dashboard.png)
+1. **Landing Page Quick Demo Pills**:
+   - 🎓 **Student Demo**: `student.dave` / `student123` (Dave Daniel • Computer Science • 3.80 GPA)
+   - 👨‍🏫 **Faculty Demo**: `teacher.yada` / `teacher123` (Dr. Yared Assefa • Computer Science Faculty)
+   - 🛡️ **Admin / Dean Demo**: `admin` / `admin123` (Registrar & Dean Administrator)
+   - 👩‍🎓 **Registration Tester**: `student.ela` / `student123` (Ella Smith • Software Engineering • Pending Registration)
 
-### Teacher Dashboard
-![Teacher Dashboard](screenshots/teacher-dashboard.png)
+2. **In-App Interactive Sandbox Switcher**:
+   When exploring the portal, a top bar allows instant switching between Student, Faculty, and Admin roles with 1 click without logging out and re-typing credentials. This lets evaluators test the complete academic lifecycle in seconds:
+   - **Student submits course request** ➔ **Admin approves** ➔ **Faculty submits grade** ➔ **Student views updated GPA & transcript**.
 
-### Student Dashboard
-![Student Dashboard](screenshots/student-dashboard.png)
+3. **Automated Idempotent Seeding**:
+   ```bash
+   python manage.py seed_demo_data
+   ```
+   Synchronizes 4 departments, 2 semesters, 8 courses, class sections, dormitory allocations, teacher assignments, and demo accounts with one command.
 
-### Course Registration
-![Course Registration](screenshots/registration.png)
+---
 
-### Grade Submission
-![Grade Submission](screenshots/grade-submission.png)
+## Landing Page & Live GPA Tool
+
+When visitors arrive at the platform, they are greeted by a modern, responsive landing page featuring:
+- **Interactive Academic Flow Stepper**: Visual 5-step walkthrough of university operations.
+- **Role Experience Portals**: Tabbed breakdown of Student, Teacher, and Administrator capabilities with direct test launches.
+- **Live GPA & Standing Calculator**: An interactive sandbox slider that converts numerical marks (0–100) into letter grades, grade points (4.0 scale), quality weights, and calculated academic standing (Active, Probation, or Dismissed).
 
 ---
 
@@ -61,7 +77,7 @@ Every piece of the system enforces business rules at the database level — not 
 - Browse course catalog filtered by department
 - View grades per semester with GPA tracking
 - View cumulative GPA and academic standing (Active / Probation / Dismissed)
-- View assigned dormitory
+- View assigned dormitory building and room number
 - Edit personal profile
 
 ### Teacher
@@ -86,19 +102,21 @@ Every piece of the system enforces business rules at the database level — not 
 ## Tech Stack
 
 **Backend**
-- Python 3.x
-- Django 5.x
+- Python 3.10+ / Django 6.x
 - Django REST Framework
-- Simple JWT (authentication)
+- Simple JWT (token-based authentication)
 - django-cors-headers
-- SQLite (development) / PostgreSQL (production)
-- Whitenoise (static files)
+- PostgreSQL (production) / SQLite (development)
+- python-decouple (environment configuration)
+- dj-database-url (dynamic database connection strings)
+- Whitenoise (compressed static file serving)
+- Gunicorn (production WSGI server)
 
 **Frontend**
 - React 18
 - React functional components with hooks
-- Fetch API (no external HTTP library)
-- CSS-in-JS (inline styles)
+- Fetch API with dynamic `API_BASE` resolution
+- Responsive CSS-in-JS + custom dark theme design system
 - DM Sans font (Google Fonts)
 
 ---
@@ -107,21 +125,31 @@ Every piece of the system enforces business rules at the database level — not 
 
 ```
 campus-hub/
-├── screenshots/                        # App screenshots for README
+├── render.yaml                         # 1-Click Render Blueprint (Backend + Postgres)
 ├── Backend/
 │   └── backend/
-│       ├── academic/          # Courses, enrollments, grades, sections, GPA
-│       ├── api/               # ViewSets, serializers, permissions, URLs
-│       ├── backend/           # Django settings, root URLs, WSGI
-│       ├── dormitory/         # Dormitory rooms and student assignments
-│       ├── registration/      # Course registration requests and approval flow
-│       └── user/              # Custom user model, JWT serializer
+│       ├── .env.example                # Backend environment configuration template
+│       ├── build.sh                    # Production build script (migrate, collectstatic, seed)
+│       ├── Procfile                    # Gunicorn entrypoint for cloud hosting
+│       ├── requirements.txt            # Python dependencies (UTF-8)
+│       ├── manage.py                   # Django management script
+│       ├── academic/                   # Courses, enrollments, grades, sections, GPA
+│       │   └── management/commands/    # seed_demo_data command
+│       ├── api/                        # ViewSets, serializers, permissions, URLs, tests.py
+│       ├── backend/                    # Django settings (decouple, dj_database_url), root URLs
+│       ├── dormitory/                  # Dormitory rooms and student assignments
+│       ├── registration/               # Course registration requests and approval flow
+│       └── user/                       # Custom user model, JWT serializer
 │
 └── Frontend/
+    ├── .env.example                    # Frontend environment configuration template
+    ├── vercel.json                     # Vercel SPA routing rewrite rules
+    ├── package.json                    # Frontend dependencies and build scripts
     └── src/
-        ├── api.js                      # Base fetch helper + token logic
-        ├── App.jsx                     # Root component, routing, sidebar
-        ├── Login.jsx                   # Login page
+        ├── api.js                      # Base fetch helper + dynamic API_BASE + demoLogin
+        ├── App.jsx                     # Root component, router, sidebar & in-app demo switcher
+        ├── LandingPage.jsx             # Modern marketing landing page & live GPA sandbox
+        ├── Login.jsx                   # Sign-in portal with 1-click demo accounts
         ├── StudentDashboard.jsx        # Student home screen
         ├── TeacherDashboard.jsx        # Teacher home screen
         ├── AdminDashboard.jsx          # Admin home screen
@@ -175,36 +203,17 @@ source .venv/bin/activate
 
 ```bash
 cd Backend/backend
-pip install django djangorestframework djangorestframework-simplejwt django-cors-headers whitenoise
+pip install -r requirements.txt
 ```
 
-**4. Configure settings for local development**
-
-Open `Backend/backend/backend/settings.py` and make sure these are set:
-
-```python
-DEBUG = True
-
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
-```
-
-**5. Run migrations**
+**4. Run migrations & seed demo data**
 
 ```bash
 python manage.py migrate
+python manage.py seed_demo_data
 ```
 
-**6. Create a superuser (admin account)**
-
-```bash
-python manage.py createsuperuser
-```
-
-**7. Start the Django server**
+**5. Start the Django server**
 
 ```bash
 python manage.py runserver
@@ -216,7 +225,7 @@ The API will be available at `http://localhost:8000/api/`
 
 ### Frontend Setup
 
-**1. Open a new terminal and go to the frontend folder**
+**1. Open a new terminal and navigate to Frontend**
 
 ```bash
 cd Frontend
@@ -228,27 +237,53 @@ cd Frontend
 npm install
 ```
 
-**3. Make sure `src/api.js` points to localhost**
-
-```javascript
-const BASE = "http://localhost:8000/api";
-```
-
-**4. Make sure `src/Login.jsx` uses the correct login endpoint**
-
-```javascript
-const API_BASE = "http://localhost:8000/api";
-// the fetch call must use:
-fetch(`${API_BASE}/auth/login/`, { ... })
-```
-
-**5. Start the React app**
+**3. Start the React app**
 
 ```bash
 npm start
 ```
 
-The app will open at `http://localhost:3000`
+The app will open at `http://localhost:3000` with the landing page and 1-click demo buttons.
+
+---
+
+### Running Automated Tests
+
+Run the full backend test suite to verify JWT authentication, course registrations, grade calculations, and demo seeding:
+
+```bash
+cd Backend/backend
+python manage.py test api
+```
+
+---
+
+## Cloud Deployment Guide
+
+### Render Deployment (Backend + PostgreSQL)
+
+A complete `render.yaml` Blueprint is included in the project root:
+
+1. Push your repository to GitHub.
+2. In the Render Dashboard, click **New +** ➔ **Blueprint**.
+3. Select your repository. Render will automatically provision:
+   - **PostgreSQL Database** (`campus-hub-db`)
+   - **Python Web Service** (`campus-hub-backend`)
+4. The service runs `build.sh` automatically:
+   - Installs dependencies from `requirements.txt`
+   - Compiles static assets via Whitenoise
+   - Executes database migrations
+   - Seeds initial demo accounts and academic catalog
+
+### Vercel Deployment (Frontend)
+
+1. Connect your repository in Vercel.
+2. Set **Root Directory** to `Frontend`.
+3. Add the environment variable:
+   ```
+   REACT_APP_API_BASE=https://your-campus-hub-backend.onrender.com/api
+   ```
+4. Click **Deploy**. Vercel uses `vercel.json` to handle all client-side routing.
 
 ---
 
@@ -276,8 +311,6 @@ The app will open at `http://localhost:3000`
 | GET/POST | `/api/dormitories/` | Dormitory rooms |
 | GET/POST | `/api/dormitory-assignments/` | Assign students to dorms |
 
-All endpoints require a JWT token in the `Authorization: Bearer <token>` header except login.
-
 ---
 
 ## Role-Based Access
@@ -304,8 +337,6 @@ All endpoints require a JWT token in the `Authorization: Bearer <token>` header 
 
 ## Academic Flow
 
-The system enforces a strict workflow. Each step depends on the previous one:
-
 ```
 1. Admin creates semester and activates it
         ↓
@@ -328,19 +359,19 @@ The system enforces a strict workflow. Each step depends on the previous one:
 
 **Grade scale:**
 
-| Mark | Grade |
-|------|-------|
-| 90–100 | A+ |
-| 85–89 | A |
-| 80–84 | A- |
-| 75–79 | B+ |
-| 70–74 | B |
-| 65–69 | B- |
-| 60–64 | C+ |
-| 50–59 | C |
-| 45–49 | C- |
-| 40–44 | D |
-| 0–39 | F |
+| Mark | Grade | Points |
+|------|-------|--------|
+| 90–100 | A+ | 4.0 |
+| 85–89 | A | 4.0 |
+| 80–84 | A- | 3.75 |
+| 75–79 | B+ | 3.5 |
+| 70–74 | B | 3.0 |
+| 65–69 | B- | 2.75 |
+| 60–64 | C+ | 2.5 |
+| 50–59 | C | 2.0 |
+| 45–49 | C- | 1.75 |
+| 40–44 | D | 1.0 |
+| 0–39 | F | 0.0 |
 
 **Academic standing rules:**
 - GPA ≥ 2.00 → **Active**
@@ -349,26 +380,6 @@ The system enforces a strict workflow. Each step depends on the previous one:
 
 ---
 
-## Environment Variables
-
-For local development no `.env` file is needed — all settings are in `settings.py`. For production deployment, the following should be set as environment variables:
-
-| Variable | Description |
-|----------|-------------|
-| `SECRET_KEY` | Django secret key |
-| `DEBUG` | Set to `False` in production |
-| `ALLOWED_HOSTS` | Comma-separated list of allowed domains |
-| `CORS_ALLOWED_ORIGINS` | Frontend URL |
-| `DATABASE_URL` | PostgreSQL connection string (production) |
-
----
-
 ## Author
 
 Built by **Biniyam Girma**
-
----
-
-## License
-
-This project is for educational purposes.

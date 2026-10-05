@@ -1,1 +1,30 @@
-node_modules
+# Dependencies
+node_modules/
+Frontend/node_modules/
+
+# Production build
+Frontend/build/
+build/
+dist/
+
+# Python & Django
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

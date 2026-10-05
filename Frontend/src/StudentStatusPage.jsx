@@ -3,20 +3,50 @@ import { apiFetch } from "./api";
 
 const S = {
   wrap: { animation: "fadeUp .4s ease both" },
-  sectionHead: { fontSize: "11px", fontWeight: "600", color: "#4a4e63", letterSpacing: ".06em", textTransform: "uppercase", marginBottom: "10px" },
+  sectionHead: { fontSize: "11px", fontWeight: "700", color: "#475569", letterSpacing: ".06em", textTransform: "uppercase", marginBottom: "10px" },
   courseGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr))", gap: "10px", marginBottom: "1.5rem" },
-  courseCard: { background: "#1a1d27", border: "1.5px solid #2a2d3a", borderRadius: "12px", padding: "1rem", cursor: "pointer", transition: "border-color .15s" },
-  courseCardActive: { borderColor: "#10b981", background: "#0f1a12" },
-  courseName: { fontSize: "14px", fontWeight: "600", color: "#f0f0f5", marginBottom: "4px" },
-  courseMeta: { fontSize: "12px", color: "#6b6f85" },
-  tableCard: { background: "#1a1d27", border: "1px solid #2a2d3a", borderRadius: "12px", overflow: "hidden" },
-  tableHeader: { display: "grid", gridTemplateColumns: "1fr 80px 80px 80px 100px", padding: "8px 14px", borderBottom: "1px solid #2a2d3a", fontSize: "11px", color: "#4a4e63", fontWeight: "600" },
-  tableRow: { display: "grid", gridTemplateColumns: "1fr 80px 80px 80px 100px", padding: "10px 14px", borderBottom: "1px solid #1e2130", fontSize: "13px", color: "#c8cad8", alignItems: "center" },
-  gpa: { fontWeight: "700" },
-  statusBadge: (s) => ({ fontSize: "11px", padding: "2px 8px", borderRadius: "20px", fontWeight: "500", background: s === "ACTIVE" ? "#1a2e1a" : s === "PROBATION" ? "#2a2310" : "#2d1a1a", border: `1px solid ${s === "ACTIVE" ? "#2a5c2a" : s === "PROBATION" ? "#4a3a10" : "#5c2a2a"}`, color: s === "ACTIVE" ? "#4ade80" : s === "PROBATION" ? "#fbbf24" : "#f87171" }),
-  gradeColor: (g) => { if (!g) return "#6b6f85"; if (["A+","A","A-"].includes(g)) return "#4ade80"; if (["B+","B","B-"].includes(g)) return "#60a5fa"; if (["C+","C","C-"].includes(g)) return "#fbbf24"; if (g === "D") return "#fb923c"; return "#f87171"; },
-  empty: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#4a4e63" },
-  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#6b6f85" },
+  courseCard: {
+    background: "#ffffff", border: "1.5px solid #e2e8f0", borderRadius: "12px",
+    padding: "1rem", cursor: "pointer", transition: "all .15s ease",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.03)",
+  },
+  courseCardActive: {
+    borderColor: "#0284c7", background: "#f0f9ff",
+    boxShadow: "0 0 0 1px #0284c7, 0 4px 12px rgba(2, 132, 199, 0.12)",
+  },
+  courseName: { fontSize: "14px", fontWeight: "700", color: "#0f172a", marginBottom: "4px" },
+  courseMeta: { fontSize: "12px", color: "#64748b" },
+  tableCard: {
+    background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "14px",
+    overflow: "hidden", boxShadow: "0 2px 10px rgba(0,0,0,0.04)",
+  },
+  tableHeader: {
+    display: "grid", gridTemplateColumns: "1fr 80px 80px 80px 100px",
+    padding: "12px 14px", borderBottom: "1px solid #e2e8f0", background: "#f8fafc",
+    fontSize: "11px", color: "#475569", fontWeight: "700", textTransform: "uppercase",
+  },
+  tableRow: {
+    display: "grid", gridTemplateColumns: "1fr 80px 80px 80px 100px",
+    padding: "12px 14px", borderBottom: "1px solid #f1f5f9",
+    fontSize: "13px", color: "#1e293b", alignItems: "center",
+  },
+  gpa: { fontWeight: "800" },
+  statusBadge: (s) => ({
+    fontSize: "11px", padding: "3px 10px", borderRadius: "20px", fontWeight: "700",
+    background: s === "ACTIVE" ? "#ecfdf5" : s === "PROBATION" ? "#fffbeb" : "#fef2f2",
+    border: `1px solid ${s === "ACTIVE" ? "#a7f3d0" : s === "PROBATION" ? "#fde68a" : "#fecaca"}`,
+    color: s === "ACTIVE" ? "#059669" : s === "PROBATION" ? "#d97706" : "#dc2626",
+  }),
+  gradeColor: (g) => {
+    if (!g) return "#64748b";
+    if (["A+","A","A-"].includes(g)) return "#059669";
+    if (["B+","B","B-"].includes(g)) return "#0284c7";
+    if (["C+","C","C-"].includes(g)) return "#d97706";
+    if (g === "D") return "#ea580c";
+    return "#dc2626";
+  },
+  empty: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
+  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
 };
 
 export default function StudentStatusPage() {
@@ -54,7 +84,7 @@ export default function StudentStatusPage() {
 
       <div style={S.sectionHead}>Your courses ({assignments.length})</div>
       {assignments.length === 0
-        ? <div style={{ ...S.tableCard, padding: "2rem", textAlign: "center", fontSize: "13px", color: "#4a4e63" }}>No courses assigned this semester.</div>
+        ? <div style={{ ...S.tableCard, padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" }}>No courses assigned this semester.</div>
         : <div style={S.courseGrid}>
             {assignments.map(a => (
               <div key={a.id}
@@ -87,11 +117,11 @@ export default function StudentStatusPage() {
                   const user     = allUsers.find(u => u.id === e.student);
                   return (
                     <div key={e.id} style={S.tableRow}>
-                      <span style={{ color: "#e2e4f0" }}>{e.student_name || (user ? `${user.first_name} ${user.last_name}` : `Student #${e.student}`)}</span>
+                      <span style={{ color: "#0f172a", fontWeight: "600" }}>{e.student_name || (user ? `${user.first_name} ${user.last_name}` : `Student #${e.student}`)}</span>
                       <span style={{ ...S.gpa, color: S.gradeColor(e.grade) }}>{e.grade || "—"}</span>
-                      <span style={{ color: acStatus?.semester_gpa ? "#60a5fa" : "#6b6f85", fontWeight: "600" }}>{acStatus?.semester_gpa ?? "—"}</span>
-                      <span style={{ color: acStatus?.cumulative_gpa ? "#818cf8" : "#6b6f85", fontWeight: "600" }}>{acStatus?.cumulative_gpa ?? "—"}</span>
-                      <span>{acStatus?.status ? <span style={S.statusBadge(acStatus.status)}>{acStatus.status}</span> : <span style={{ color: "#4a4e63", fontSize: "12px" }}>—</span>}</span>
+                      <span style={{ color: acStatus?.semester_gpa ? "#0284c7" : "#94a3b8", fontWeight: "700" }}>{acStatus?.semester_gpa ?? "—"}</span>
+                      <span style={{ color: acStatus?.cumulative_gpa ? "#2563eb" : "#94a3b8", fontWeight: "700" }}>{acStatus?.cumulative_gpa ?? "—"}</span>
+                      <span>{acStatus?.status ? <span style={S.statusBadge(acStatus.status)}>{acStatus.status}</span> : <span style={{ color: "#94a3b8", fontSize: "12px" }}>—</span>}</span>
                     </div>
                   );
                 })

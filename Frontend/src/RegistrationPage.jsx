@@ -4,21 +4,23 @@ import { apiFetch } from "./api";
 const S = {
   wrap: { animation: "fadeUp .4s ease both" },
   banner: {
-    background: "linear-gradient(120deg,#0f1520 60%,#111a2a)",
-    border: "1px solid #1e2a3a",
+    background: "linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%)",
+    border: "1px solid #bae6fd",
     borderRadius: "16px", padding: "1.5rem",
     marginBottom: "1.25rem",
+    boxShadow: "0 4px 20px rgba(2, 132, 199, 0.08)",
   },
-  bannerTitle: { fontSize: "18px", fontWeight: "700", color: "#f0f0f5", marginBottom: "4px" },
-  bannerSub: { fontSize: "13px", color: "#6b7f95" },
+  bannerTitle: { fontSize: "18px", fontWeight: "800", color: "#0f172a", marginBottom: "4px" },
+  bannerSub: { fontSize: "13px", color: "#0369a1", fontWeight: "500" },
   semBadge: {
     display: "inline-flex", alignItems: "center", gap: "6px",
-    background: "#1a2535", border: "1px solid #2a4060",
+    background: "#ffffff", border: "1px solid #7dd3fc",
     borderRadius: "20px", padding: "4px 12px",
-    fontSize: "12px", color: "#60a5fa", marginTop: "10px",
+    fontSize: "12px", color: "#0284c7", marginTop: "10px",
+    fontWeight: "700", boxShadow: "0 1px 4px rgba(2, 132, 199, 0.08)",
   },
   sectionHead: {
-    fontSize: "11px", fontWeight: "600", color: "#4a4e63",
+    fontSize: "11px", fontWeight: "700", color: "#475569",
     letterSpacing: ".06em", textTransform: "uppercase", marginBottom: "10px",
   },
   courseGrid: {
@@ -27,20 +29,22 @@ const S = {
     gap: "10px", marginBottom: "1.5rem",
   },
   courseCard: {
-    background: "#1a1d27", border: "1.5px solid #2a2d3a",
+    background: "#ffffff", border: "1.5px solid #e2e8f0",
     borderRadius: "12px", padding: "1rem", cursor: "pointer",
-    transition: "border-color .15s, background .15s",
+    transition: "border-color .15s, background .15s, box-shadow .15s",
     position: "relative",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.03)",
   },
   courseCardSelected: {
-    background: "#1a1f35", borderColor: "#6366f1",
+    background: "#eff6ff", borderColor: "#2563eb",
+    boxShadow: "0 0 0 1px #2563eb, 0 4px 12px rgba(37, 99, 235, 0.12)",
   },
-  courseName: { fontSize: "14px", fontWeight: "600", color: "#f0f0f5", marginBottom: "4px" },
-  courseMeta: { fontSize: "12px", color: "#6b6f85" },
+  courseName: { fontSize: "14px", fontWeight: "700", color: "#0f172a", marginBottom: "4px" },
+  courseMeta: { fontSize: "12px", color: "#64748b" },
   checkmark: {
     position: "absolute", top: "10px", right: "10px",
     width: "20px", height: "20px", borderRadius: "50%",
-    background: "#6366f1", display: "flex",
+    background: "#2563eb", display: "flex",
     alignItems: "center", justifyContent: "center",
     fontSize: "11px", color: "#fff",
   },
@@ -49,55 +53,58 @@ const S = {
     justifyContent: "space-between", flexWrap: "wrap",
     gap: "12px", marginBottom: "1.5rem",
   },
-  selectedCount: { fontSize: "13px", color: "#9ca0b8" },
+  selectedCount: { fontSize: "13px", color: "#475569", fontWeight: "600" },
   submitBtn: {
-    background: "linear-gradient(135deg,#6366f1,#8b5cf6)",
+    background: "linear-gradient(135deg, #1d4ed8, #2563eb)",
     border: "none", borderRadius: "10px",
     padding: "10px 24px", color: "#fff",
-    fontSize: "14px", fontWeight: "600",
+    fontSize: "14px", fontWeight: "700",
     cursor: "pointer", fontFamily: "'DM Sans', sans-serif",
-    transition: "opacity .15s",
+    transition: "opacity .15s, transform .15s",
+    boxShadow: "0 4px 14px rgba(37, 99, 235, 0.3)",
   },
-  disabledBtn: { opacity: 0.4, cursor: "not-allowed" },
+  disabledBtn: { opacity: 0.4, cursor: "not-allowed", boxShadow: "none" },
   statusCard: {
-    background: "#1a1d27", border: "1px solid #2a2d3a",
+    background: "#ffffff", border: "1px solid #e2e8f0",
     borderRadius: "16px", padding: "2rem",
     textAlign: "center", marginBottom: "1.25rem",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.04)",
   },
   statusIcon: { fontSize: "36px", marginBottom: "12px" },
-  statusTitle: { fontSize: "17px", fontWeight: "700", color: "#f0f0f5", marginBottom: "6px" },
-  statusSub: { fontSize: "13px", color: "#6b6f85", marginBottom: "1.25rem" },
+  statusTitle: { fontSize: "17px", fontWeight: "800", color: "#0f172a", marginBottom: "6px" },
+  statusSub: { fontSize: "13px", color: "#64748b", marginBottom: "1.25rem" },
   courseList: {
-    background: "#0f1117", border: "1px solid #2a2d3a",
+    background: "#ffffff", border: "1px solid #e2e8f0",
     borderRadius: "10px", padding: "10px 14px",
     textAlign: "left", marginBottom: "1rem",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.03)",
   },
   courseListItem: {
-    fontSize: "13px", color: "#c8cad8",
-    padding: "6px 0", borderBottom: "1px solid #1e2130",
-    display: "flex", alignItems: "center", gap: "8px",
+    fontSize: "13px", color: "#0f172a",
+    padding: "8px 0", borderBottom: "1px solid #f1f5f9",
+    display: "flex", alignItems: "center", gap: "8px", fontWeight: "500",
   },
   dismissed: {
-    background: "#2d1a1a", border: "1px solid #5c2a2a",
+    background: "#fef2f2", border: "1px solid #fecaca",
     borderRadius: "16px", padding: "2rem", textAlign: "center",
   },
   error: {
-    background: "#2d1a1a", border: "1px solid #5c2a2a",
+    background: "#fef2f2", border: "1px solid #fecaca",
     borderRadius: "10px", padding: "10px 14px",
-    fontSize: "13px", color: "#f87171", marginBottom: "1rem",
+    fontSize: "13px", color: "#dc2626", marginBottom: "1rem", fontWeight: "600",
   },
   success: {
-    background: "#1a2e1a", border: "1px solid #2a5c2a",
+    background: "#ecfdf5", border: "1px solid #a7f3d0",
     borderRadius: "10px", padding: "10px 14px",
-    fontSize: "13px", color: "#4ade80", marginBottom: "1rem",
+    fontSize: "13px", color: "#059669", marginBottom: "1rem", fontWeight: "600",
   },
-  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#6b6f85" },
+  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
   pill: (color) => ({
-    display: "inline-block", fontSize: "11px", padding: "2px 8px",
-    borderRadius: "20px", fontWeight: "500",
-    background: color === "green" ? "#1a2e1a" : color === "yellow" ? "#2a2310" : color === "red" ? "#2d1a1a" : "#1e2130",
-    border: `1px solid ${color === "green" ? "#2a5c2a" : color === "yellow" ? "#4a3a10" : color === "red" ? "#5c2a2a" : "#2a2d3a"}`,
-    color: color === "green" ? "#4ade80" : color === "yellow" ? "#fbbf24" : color === "red" ? "#f87171" : "#9ca0b8",
+    display: "inline-block", fontSize: "11px", padding: "3px 10px",
+    borderRadius: "20px", fontWeight: "600",
+    background: color === "green" ? "#ecfdf5" : color === "yellow" ? "#fffbeb" : color === "red" ? "#fef2f2" : "#f1f5f9",
+    border: `1px solid ${color === "green" ? "#a7f3d0" : color === "yellow" ? "#fde68a" : color === "red" ? "#fecaca" : "#cbd5e1"}`,
+    color: color === "green" ? "#059669" : color === "yellow" ? "#d97706" : color === "red" ? "#dc2626" : "#475569",
   }),
 };
 
@@ -240,7 +247,7 @@ export default function RegistrationPage() {
             ? <div style={{ fontSize: "13px", color: "#4a4e63", padding: "8px 0" }}>No courses found.</div>
             : (myRegistration.courses || []).map(c => (
                 <div key={c} style={S.courseListItem}>
-                  <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#6366f1", display: "inline-block", flexShrink: 0 }} />
+                  <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#0284c7", display: "inline-block", flexShrink: 0 }} />
                   {courses.find(cr => cr.id === c)?.name || `Course #${c}`}
                 </div>
               ))
@@ -265,7 +272,7 @@ export default function RegistrationPage() {
         <div style={S.bannerTitle}>Course Registration</div>
         <div style={S.bannerSub}>Select the courses you want to enroll in this semester.</div>
         <div style={S.semBadge}>
-          <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#60a5fa", display: "inline-block" }} />
+          <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#0284c7", display: "inline-block" }} />
           {activeSemester.name} — {activeSemester.year}
         </div>
       </div>
@@ -276,7 +283,7 @@ export default function RegistrationPage() {
       <div style={S.sectionHead}>Available courses ({courses.length})</div>
       {courses.length === 0
         ? <div style={{ ...S.statusCard, padding: "1.5rem" }}>
-            <div style={{ fontSize: "13px", color: "#4a4e63" }}>No courses available for your department.</div>
+            <div style={{ fontSize: "13px", color: "#64748b" }}>No courses available for your department.</div>
           </div>
         : <div style={S.courseGrid}>
             {courses.map(c => {
@@ -289,7 +296,7 @@ export default function RegistrationPage() {
                   <div style={S.courseName}>{c.name}</div>
                   <div style={S.courseMeta}>{c.code} · {c.credit_hours} credit{c.credit_hours !== 1 ? "s" : ""}</div>
                   {c.description && (
-                    <div style={{ fontSize: "12px", color: "#4a4e63", marginTop: "6px" }}>
+                    <div style={{ fontSize: "12px", color: "#64748b", marginTop: "6px" }}>
                       {c.description.slice(0, 60)}{c.description.length > 60 ? "…" : ""}
                     </div>
                   )}

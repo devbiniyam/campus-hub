@@ -4,14 +4,15 @@ import { apiFetch } from "./api";
 const S = {
   wrap: { animation: "fadeUp .4s ease both" },
   banner: {
-    background: "linear-gradient(120deg,#0f1a12 60%,#111a1a)",
-    border: "1px solid #1e3020", borderRadius: "16px",
+    background: "linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%)",
+    border: "1px solid #a7f3d0", borderRadius: "16px",
     padding: "1.5rem", marginBottom: "1.25rem",
+    boxShadow: "0 4px 20px rgba(5, 150, 105, 0.08)",
   },
-  bannerTitle: { fontSize: "18px", fontWeight: "700", color: "#f0f0f5", marginBottom: "4px" },
-  bannerSub: { fontSize: "13px", color: "#6b8570" },
+  bannerTitle: { fontSize: "18px", fontWeight: "800", color: "#0f172a", marginBottom: "4px" },
+  bannerSub: { fontSize: "13px", color: "#047857", fontWeight: "500" },
   sectionHead: {
-    fontSize: "11px", fontWeight: "600", color: "#4a4e63",
+    fontSize: "11px", fontWeight: "700", color: "#475569",
     letterSpacing: ".06em", textTransform: "uppercase", marginBottom: "10px",
   },
   courseGrid: {
@@ -19,71 +20,77 @@ const S = {
     gap: "10px", marginBottom: "1.5rem",
   },
   courseCard: {
-    background: "#1a1d27", border: "1.5px solid #2a2d3a",
+    background: "#ffffff", border: "1.5px solid #e2e8f0",
     borderRadius: "12px", padding: "1rem", cursor: "pointer",
-    transition: "border-color .15s",
+    transition: "border-color .15s, background .15s, box-shadow .15s",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.03)",
   },
-  courseCardActive: { borderColor: "#10b981", background: "#0f1a12" },
-  courseName: { fontSize: "14px", fontWeight: "600", color: "#f0f0f5", marginBottom: "4px" },
-  courseMeta: { fontSize: "12px", color: "#6b6f85" },
+  courseCardActive: {
+    borderColor: "#059669", background: "#ecfdf5",
+    boxShadow: "0 0 0 1px #059669, 0 4px 12px rgba(5, 150, 105, 0.12)",
+  },
+  courseName: { fontSize: "14px", fontWeight: "700", color: "#0f172a", marginBottom: "4px" },
+  courseMeta: { fontSize: "12px", color: "#64748b" },
   tableCard: {
-    background: "#1a1d27", border: "1px solid #2a2d3a",
-    borderRadius: "12px", overflow: "hidden", marginBottom: "1.25rem",
+    background: "#ffffff", border: "1px solid #e2e8f0",
+    borderRadius: "14px", overflow: "hidden", marginBottom: "1.25rem",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.04)",
   },
   tableHeader: {
     display: "grid", gridTemplateColumns: "1fr 120px 120px 100px",
-    padding: "8px 14px", borderBottom: "1px solid #2a2d3a",
-    fontSize: "11px", color: "#4a4e63", fontWeight: "600",
+    padding: "12px 14px", borderBottom: "1px solid #e2e8f0",
+    background: "#f8fafc",
+    fontSize: "11px", color: "#475569", fontWeight: "700", textTransform: "uppercase",
   },
   tableRow: {
     display: "grid", gridTemplateColumns: "1fr 120px 120px 100px",
-    padding: "10px 14px", borderBottom: "1px solid #1e2130",
-    fontSize: "13px", color: "#c8cad8", alignItems: "center",
+    padding: "12px 14px", borderBottom: "1px solid #f1f5f9",
+    fontSize: "13px", color: "#1e293b", alignItems: "center",
   },
   input: {
-    background: "#0f1117", border: "1px solid #2a2d3a",
-    borderRadius: "6px", padding: "5px 8px",
-    color: "#f0f0f5", fontSize: "13px", width: "70px",
+    background: "#ffffff", border: "1px solid #cbd5e1",
+    borderRadius: "8px", padding: "6px 10px",
+    color: "#0f172a", fontSize: "13px", width: "70px",
     fontFamily: "'DM Sans', sans-serif", outline: "none",
   },
   submitBtn: {
-    fontSize: "11px", padding: "4px 12px", borderRadius: "6px",
-    border: "1px solid #2a5c2a", color: "#4ade80",
-    background: "transparent", cursor: "pointer",
-    fontFamily: "'DM Sans', sans-serif", fontWeight: "500",
+    fontSize: "11px", padding: "5px 14px", borderRadius: "6px",
+    border: "1px solid #a7f3d0", color: "#059669",
+    background: "#ecfdf5", cursor: "pointer",
+    fontFamily: "'DM Sans', sans-serif", fontWeight: "700",
   },
   changeBtn: {
-    fontSize: "11px", padding: "4px 12px", borderRadius: "6px",
-    border: "1px solid #2a3a5a", color: "#60a5fa",
-    background: "transparent", cursor: "pointer",
-    fontFamily: "'DM Sans', sans-serif", fontWeight: "500",
+    fontSize: "11px", padding: "5px 14px", borderRadius: "6px",
+    border: "1px solid #bae6fd", color: "#0284c7",
+    background: "#f0f9ff", cursor: "pointer",
+    fontFamily: "'DM Sans', sans-serif", fontWeight: "700",
   },
-  graded: { fontSize: "13px", fontWeight: "700" },
-  empty: { padding: "1.5rem", textAlign: "center", fontSize: "13px", color: "#4a4e63" },
-  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#6b6f85" },
+  graded: { fontSize: "13px", fontWeight: "800" },
+  empty: { padding: "1.5rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
+  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
   modal: {
     position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
-    background: "rgba(0,0,0,0.7)", display: "flex",
+    background: "rgba(15, 23, 42, 0.45)", backdropFilter: "blur(4px)", display: "flex",
     alignItems: "center", justifyContent: "center", zIndex: 200,
   },
   modalCard: {
-    background: "#1a1d27", border: "1px solid #2a2d3a",
+    background: "#ffffff", border: "1px solid #e2e8f0",
     borderRadius: "16px", padding: "1.5rem", width: "100%",
-    maxWidth: "400px",
+    maxWidth: "400px", boxShadow: "0 20px 50px rgba(0,0,0,0.15)",
   },
-  modalTitle: { fontSize: "16px", fontWeight: "700", color: "#f0f0f5", marginBottom: "1rem" },
-  modalLabel: { fontSize: "12px", color: "#9ca0b8", marginBottom: "4px" },
+  modalTitle: { fontSize: "16px", fontWeight: "800", color: "#0f172a", marginBottom: "1rem" },
+  modalLabel: { fontSize: "12px", color: "#475569", marginBottom: "4px", fontWeight: "700" },
   modalInput: {
-    background: "#0f1117", border: "1px solid #2a2d3a",
+    background: "#ffffff", border: "1px solid #cbd5e1",
     borderRadius: "8px", padding: "8px 12px",
-    color: "#f0f0f5", fontSize: "13px", width: "100%",
+    color: "#0f172a", fontSize: "13px", width: "100%",
     fontFamily: "'DM Sans', sans-serif", outline: "none",
     marginBottom: "12px", boxSizing: "border-box",
   },
   modalTextarea: {
-    background: "#0f1117", border: "1px solid #2a2d3a",
+    background: "#ffffff", border: "1px solid #cbd5e1",
     borderRadius: "8px", padding: "8px 12px",
-    color: "#f0f0f5", fontSize: "13px", width: "100%",
+    color: "#0f172a", fontSize: "13px", width: "100%",
     fontFamily: "'DM Sans', sans-serif", outline: "none",
     marginBottom: "12px", boxSizing: "border-box",
     minHeight: "80px", resize: "vertical",
@@ -91,20 +98,21 @@ const S = {
   modalBtns: { display: "flex", gap: "8px", justifyContent: "flex-end", marginTop: "4px" },
   cancelBtn: {
     fontSize: "13px", padding: "8px 16px", borderRadius: "8px",
-    border: "1px solid #2a2d3a", color: "#9ca0b8",
-    background: "transparent", cursor: "pointer",
-    fontFamily: "'DM Sans', sans-serif",
+    border: "1px solid #cbd5e1", color: "#64748b",
+    background: "#ffffff", cursor: "pointer",
+    fontFamily: "'DM Sans', sans-serif", fontWeight: "600",
   },
   confirmBtn: {
     fontSize: "13px", padding: "8px 16px", borderRadius: "8px",
     border: "none", color: "#fff",
-    background: "linear-gradient(135deg,#6366f1,#8b5cf6)",
-    cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "600",
+    background: "linear-gradient(135deg, #1d4ed8, #2563eb)",
+    cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "700",
+    boxShadow: "0 2px 8px rgba(37, 99, 235, 0.25)",
   },
   error: {
-    background: "#2d1a1a", border: "1px solid #5c2a2a",
+    background: "#fef2f2", border: "1px solid #fecaca",
     borderRadius: "8px", padding: "8px 12px",
-    fontSize: "12px", color: "#f87171", marginBottom: "10px",
+    fontSize: "12px", color: "#dc2626", marginBottom: "10px", fontWeight: "600",
   },
   toast: {
     position: "fixed", bottom: "20px", right: "20px",
@@ -114,12 +122,12 @@ const S = {
 };
 
 function gradeColor(g) {
-  if (!g) return "#6b6f85";
-  if (["A+","A","A-"].includes(g)) return "#4ade80";
-  if (["B+","B","B-"].includes(g)) return "#60a5fa";
-  if (["C+","C","C-"].includes(g)) return "#fbbf24";
-  if (g === "D") return "#fb923c";
-  return "#f87171";
+  if (!g) return "#64748b";
+  if (["A+","A","A-"].includes(g)) return "#059669";
+  if (["B+","B","B-"].includes(g)) return "#0284c7";
+  if (["C+","C","C-"].includes(g)) return "#d97706";
+  if (g === "D") return "#ea580c";
+  return "#dc2626";
 }
 
 export default function GradeSubmissionPage() {
@@ -281,7 +289,7 @@ export default function GradeSubmissionPage() {
       {/* Course selector */}
       <div style={S.sectionHead}>Your courses ({assignments.length})</div>
       {assignments.length === 0
-        ? <div style={{ ...S.tableCard, padding: "1.5rem", textAlign: "center", fontSize: "13px", color: "#4a4e63" }}>
+        ? <div style={{ ...S.tableCard, padding: "1.5rem", textAlign: "center", fontSize: "13px", color: "#64748b" }}>
             No courses assigned to you this semester.
           </div>
         : <div style={S.courseGrid}>
@@ -293,7 +301,7 @@ export default function GradeSubmissionPage() {
                 <div style={S.courseMeta}>
                   {a.course_code || ""} · {a.teaching_role || "Lecturer"}
                 </div>
-                <div style={{ fontSize: "11px", color: "#4a4e63", marginTop: "4px" }}>
+                <div style={{ fontSize: "11px", color: "#64748b", marginTop: "4px" }}>
                   {enrollments.filter(e => e.course === a.course).length} students enrolled
                 </div>
               </div>
@@ -318,7 +326,7 @@ export default function GradeSubmissionPage() {
               ? <div style={S.empty}>No students enrolled in this course yet.</div>
               : courseEnrollments.map(e => (
                   <div key={e.id} style={S.tableRow}>
-                    <span style={{ color: "#e2e4f0" }}>{e.student_name || `Student #${e.student}`}</span>
+                    <span style={{ color: "#0f172a", fontWeight: "600" }}>{e.student_name || `Student #${e.student}`}</span>
                     <span style={{ ...S.graded, color: gradeColor(e.grade) }}>
                       {e.grade || "—"}
                     </span>

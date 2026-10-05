@@ -4,49 +4,37 @@ import { apiFetch } from "./api";
 const S = {
   wrap: { animation: "fadeUp .4s ease both" },
   topRow: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.25rem", flexWrap: "wrap", gap: "10px" },
-  addBtn: { fontSize: "13px", padding: "8px 16px", borderRadius: "10px", border: "none", background: "linear-gradient(135deg,#6366f1,#8b5cf6)", color: "#fff", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "600" },
-  tableCard: { background: "#1a1d27", border: "1px solid #2a2d3a", borderRadius: "12px", overflow: "hidden", marginBottom: "1.25rem" },
-  tableHeader: { display: "grid", padding: "8px 14px", borderBottom: "1px solid #2a2d3a", fontSize: "11px", color: "#4a4e63", fontWeight: "600" },
-  tableRow: { display: "grid", padding: "10px 14px", borderBottom: "1px solid #1e2130", fontSize: "13px", color: "#c8cad8", alignItems: "center" },
-  actionBtn: { fontSize: "11px", padding: "3px 8px", borderRadius: "6px", border: "1px solid", cursor: "pointer", fontWeight: "500", background: "transparent", fontFamily: "'DM Sans', sans-serif", marginRight: "4px" },
+  addBtn: { fontSize: "13px", padding: "8px 16px", borderRadius: "10px", border: "none", background: "linear-gradient(135deg, #1d4ed8, #2563eb)", color: "#fff", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "700", boxShadow: "0 2px 8px rgba(37, 99, 235, 0.25)" },
+  tableCard: { background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "14px", overflow: "hidden", marginBottom: "1.25rem", boxShadow: "0 2px 10px rgba(0,0,0,0.04)" },
+  tableHeader: { display: "grid", padding: "12px 14px", borderBottom: "1px solid #e2e8f0", background: "#f8fafc", fontSize: "11px", color: "#475569", fontWeight: "700", textTransform: "uppercase" },
+  tableRow: { display: "grid", padding: "12px 14px", borderBottom: "1px solid #f1f5f9", fontSize: "13px", color: "#1e293b", alignItems: "center" },
+  actionBtn: { fontSize: "11px", padding: "5px 12px", borderRadius: "6px", border: "1px solid", cursor: "pointer", fontWeight: "700", background: "transparent", fontFamily: "'DM Sans', sans-serif", marginRight: "6px" },
   modal: {
-  position: "fixed",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  background: "rgba(0,0,0,0.7)",
-  display: "flex",
-  alignItems: "flex-start",
-  justifyContent: "center",
-  overflowY: "auto",
-  zIndex: 200,
-  padding: "2rem 1rem",
-},
+    position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+    background: "rgba(15, 23, 42, 0.45)", backdropFilter: "blur(4px)",
+    display: "flex", alignItems: "flex-start", justifyContent: "center",
+    overflowY: "auto", zIndex: 200, padding: "2rem 1rem",
+  },
   modalCard: {
-  background: "#1a1d27",
-  border: "1px solid #2a2d3a",
-  borderRadius: "16px",
-  padding: "1.5rem",
-  width: "100%",
-  maxWidth: "460px",
-  marginTop: "1rem",
-},
-  modalTitle: { fontSize: "16px", fontWeight: "700", color: "#f0f0f5", marginBottom: "1.25rem" },
-  label: { fontSize: "12px", color: "#9ca0b8", marginBottom: "4px", display: "block" },
-  input: { background: "#0f1117", border: "1px solid #2a2d3a", borderRadius: "8px", padding: "8px 12px", color: "#f0f0f5", fontSize: "13px", width: "100%", fontFamily: "'DM Sans', sans-serif", outline: "none", boxSizing: "border-box", marginBottom: "12px" },
-  select: { background: "#0f1117", border: "1px solid #2a2d3a", borderRadius: "8px", padding: "8px 12px", color: "#f0f0f5", fontSize: "13px", width: "100%", fontFamily: "'DM Sans', sans-serif", outline: "none", boxSizing: "border-box", marginBottom: "12px" },
+    background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px",
+    padding: "1.5rem", width: "100%", maxWidth: "460px", marginTop: "1rem",
+    boxShadow: "0 20px 50px rgba(0,0,0,0.15)",
+  },
+  modalTitle: { fontSize: "16px", fontWeight: "800", color: "#0f172a", marginBottom: "1.25rem" },
+  label: { fontSize: "12px", color: "#475569", marginBottom: "4px", display: "block", fontWeight: "700" },
+  input: { background: "#ffffff", border: "1px solid #cbd5e1", borderRadius: "8px", padding: "8px 12px", color: "#0f172a", fontSize: "13px", width: "100%", fontFamily: "'DM Sans', sans-serif", outline: "none", boxSizing: "border-box", marginBottom: "12px" },
+  select: { background: "#ffffff", border: "1px solid #cbd5e1", borderRadius: "8px", padding: "8px 12px", color: "#0f172a", fontSize: "13px", width: "100%", fontFamily: "'DM Sans', sans-serif", outline: "none", boxSizing: "border-box", marginBottom: "12px" },
   row2: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" },
   modalBtns: { display: "flex", gap: "8px", justifyContent: "flex-end", marginTop: "4px" },
-  cancelBtn: { fontSize: "13px", padding: "8px 16px", borderRadius: "8px", border: "1px solid #2a2d3a", color: "#9ca0b8", background: "transparent", cursor: "pointer", fontFamily: "'DM Sans', sans-serif" },
-  saveBtn: { fontSize: "13px", padding: "8px 20px", borderRadius: "8px", border: "none", color: "#fff", background: "linear-gradient(135deg,#6366f1,#8b5cf6)", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "600" },
-  error: { background: "#2d1a1a", border: "1px solid #5c2a2a", borderRadius: "8px", padding: "8px 12px", fontSize: "12px", color: "#f87171", marginBottom: "12px" },
-  toast: { position: "fixed", bottom: "20px", right: "20px", borderRadius: "10px", padding: "10px 16px", fontSize: "13px", zIndex: 300 },
-  empty: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#4a4e63" },
-  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#6b6f85" },
+  cancelBtn: { fontSize: "13px", padding: "8px 16px", borderRadius: "8px", border: "1px solid #cbd5e1", color: "#64748b", background: "#ffffff", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "600" },
+  saveBtn: { fontSize: "13px", padding: "8px 20px", borderRadius: "8px", border: "none", color: "#fff", background: "linear-gradient(135deg, #1d4ed8, #2563eb)", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "700", boxShadow: "0 2px 8px rgba(37, 99, 235, 0.25)" },
+  error: { background: "#fef2f2", border: "1px solid #fecaca", borderRadius: "8px", padding: "8px 12px", fontSize: "12px", color: "#dc2626", marginBottom: "12px", fontWeight: "600" },
+  toast: { position: "fixed", bottom: "20px", right: "20px", borderRadius: "10px", padding: "10px 16px", fontSize: "13px", zIndex: 300, fontWeight: "700" },
+  empty: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
+  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
   tabRow: { display: "flex", gap: "8px", marginBottom: "1.25rem" },
-  tab: { fontSize: "13px", padding: "7px 16px", borderRadius: "8px", border: "1px solid #2a2d3a", background: "transparent", color: "#9ca0b8", cursor: "pointer", fontFamily: "'DM Sans', sans-serif" },
-  tabActive: { background: "#23273a", color: "#f0f0f5", borderColor: "#4a4e63" },
+  tab: { fontSize: "13px", padding: "7px 16px", borderRadius: "8px", border: "1px solid #cbd5e1", background: "#ffffff", color: "#475569", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "600", transition: "all .15s ease" },
+  tabActive: { background: "#eff6ff", color: "#1d4ed8", borderColor: "#2563eb", fontWeight: "700" },
 };
 
 const EMPTY_SEC = { name: "", department: "", entry_year: "", program_year: "", capacity: 40, is_active: true };
@@ -180,24 +168,24 @@ export default function SectionManagementPage() {
       {tab === "sections" && (
         <>
           <div style={S.topRow}>
-            <span style={{ fontSize: "14px", fontWeight: "600", color: "#f0f0f5" }}>All sections</span>
+            <span style={{ fontSize: "14px", fontWeight: "700", color: "#0f172a" }}>All sections</span>
             <button style={S.addBtn} onClick={openAddSection}>+ Add section</button>
           </div>
           <div style={S.tableCard}>
-            <div style={{ ...S.tableHeader, gridTemplateColumns: "1fr 100px 80px 80px 80px 120px" }}>
+            <div style={{ ...S.tableHeader, gridTemplateColumns: "1fr 100px 80px 80px 80px 140px" }}>
               <span>Department</span><span>Section</span><span>Entry yr</span><span>Year</span><span>Capacity</span><span>Actions</span>
             </div>
             {sections.length === 0 ? <div style={S.empty}>No sections yet.</div>
               : sections.map(s => (
-                <div key={s.id} style={{ ...S.tableRow, gridTemplateColumns: "1fr 100px 80px 80px 80px 120px" }}>
-                  <span style={{ color: "#e2e4f0" }}>{departments.find(d => d.id === s.department)?.name || `Dept #${s.department}`}</span>
-                  <span style={{ fontWeight: "600", color: "#818cf8" }}>Section {s.name}</span>
-                  <span>{s.entry_year}</span>
-                  <span>Year {s.program_year}</span>
-                  <span>{s.capacity}</span>
+                <div key={s.id} style={{ ...S.tableRow, gridTemplateColumns: "1fr 100px 80px 80px 80px 140px" }}>
+                  <span style={{ color: "#0f172a", fontWeight: "600" }}>{departments.find(d => d.id === s.department)?.name || `Dept #${s.department}`}</span>
+                  <span style={{ fontWeight: "700", color: "#7c3aed" }}>Section {s.name}</span>
+                  <span style={{ color: "#0284c7", fontWeight: "600" }}>{s.entry_year}</span>
+                  <span style={{ color: "#64748b" }}>Year {s.program_year}</span>
+                  <span style={{ color: "#64748b" }}>{s.capacity}</span>
                   <span>
-                    <button style={{ ...S.actionBtn, borderColor: "#2a3a5a", color: "#60a5fa" }} onClick={() => openEditSection(s)}>Edit</button>
-                    <button style={{ ...S.actionBtn, borderColor: "#5c2a2a", color: "#f87171" }} onClick={() => handleDelete("/sections/", s.id, setSections)}>Del</button>
+                    <button style={{ ...S.actionBtn, borderColor: "#bae6fd", color: "#0284c7", background: "#f0f9ff" }} onClick={() => openEditSection(s)}>Edit</button>
+                    <button style={{ ...S.actionBtn, borderColor: "#fecaca", color: "#dc2626", background: "#fef2f2" }} onClick={() => handleDelete("/sections/", s.id, setSections)}>Del</button>
                   </span>
                 </div>
               ))}
@@ -208,7 +196,7 @@ export default function SectionManagementPage() {
       {tab === "assignments" && (
         <>
           <div style={S.topRow}>
-            <span style={{ fontSize: "14px", fontWeight: "600", color: "#f0f0f5" }}>Student section assignments</span>
+            <span style={{ fontSize: "14px", fontWeight: "700", color: "#0f172a" }}>Student section assignments</span>
             <button style={S.addBtn} onClick={openAddAssign}>+ Assign student</button>
           </div>
           <div style={S.tableCard}>
@@ -222,11 +210,11 @@ export default function SectionManagementPage() {
                 const semester = semesters.find(s => s.id === a.semester);
                 return (
                   <div key={a.id} style={{ ...S.tableRow, gridTemplateColumns: "1fr 120px 120px 80px" }}>
-                    <span style={{ color: "#e2e4f0" }}>{student ? `${student.first_name} ${student.last_name}` : `Student #${a.student}`}</span>
-                    <span style={{ color: "#818cf8" }}>Section {section?.name || a.section}</span>
-                    <span style={{ color: "#9ca0b8", fontSize: "12px" }}>{semester ? `${semester.name} ${semester.year}` : `Sem #${a.semester}`}</span>
+                    <span style={{ color: "#0f172a", fontWeight: "600" }}>{student ? `${student.first_name} ${student.last_name}` : `Student #${a.student}`}</span>
+                    <span style={{ color: "#7c3aed", fontWeight: "700" }}>Section {section?.name || a.section}</span>
+                    <span style={{ color: "#64748b", fontSize: "12px" }}>{semester ? `${semester.name} ${semester.year}` : `Sem #${a.semester}`}</span>
                     <span>
-                      <button style={{ ...S.actionBtn, borderColor: "#5c2a2a", color: "#f87171" }} onClick={() => handleDelete("/section-assignments/", a.id, setAssignments)}>Del</button>
+                      <button style={{ ...S.actionBtn, borderColor: "#fecaca", color: "#dc2626", background: "#fef2f2" }} onClick={() => handleDelete("/section-assignments/", a.id, setAssignments)}>Del</button>
                     </span>
                   </div>
                 );

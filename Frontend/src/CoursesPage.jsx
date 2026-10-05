@@ -4,33 +4,35 @@ import { apiFetch } from "./api";
 const S = {
   wrap: { animation: "fadeUp .4s ease both" },
   banner: {
-    background: "linear-gradient(120deg,#0f1117 60%,#1a1520)",
-    border: "1px solid #2a2d3a", borderRadius: "16px",
+    background: "linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%)",
+    border: "1px solid #bae6fd", borderRadius: "16px",
     padding: "1.5rem", marginBottom: "1.25rem",
+    boxShadow: "0 4px 20px rgba(2, 132, 199, 0.08)",
   },
-  bannerTitle: { fontSize: "18px", fontWeight: "700", color: "#f0f0f5", marginBottom: "4px" },
-  bannerSub: { fontSize: "13px", color: "#6b6f85" },
+  bannerTitle: { fontSize: "18px", fontWeight: "800", color: "#0f172a", marginBottom: "4px" },
+  bannerSub: { fontSize: "13px", color: "#0369a1", fontWeight: "500" },
   searchRow: {
     display: "flex", gap: "10px", marginBottom: "1.25rem", flexWrap: "wrap",
   },
   searchInput: {
-    background: "#1a1d27", border: "1px solid #2a2d3a",
+    background: "#ffffff", border: "1px solid #cbd5e1",
     borderRadius: "10px", padding: "8px 14px",
-    color: "#f0f0f5", fontSize: "13px", flex: 1, minWidth: "200px",
+    color: "#0f172a", fontSize: "13px", flex: 1, minWidth: "200px",
     fontFamily: "'DM Sans', sans-serif", outline: "none",
   },
   filterBtn: {
     fontSize: "12px", padding: "8px 16px", borderRadius: "20px",
-    border: "1px solid #2a2d3a", background: "transparent",
-    color: "#9ca0b8", cursor: "pointer",
-    fontFamily: "'DM Sans', sans-serif",
+    border: "1px solid #cbd5e1", background: "#ffffff",
+    color: "#475569", cursor: "pointer",
+    fontFamily: "'DM Sans', sans-serif", fontWeight: "600",
+    transition: "all 0.15s ease",
   },
   filterBtnActive: {
-    background: "#23273a", color: "#f0f0f5",
-    borderColor: "#4a4e63",
+    background: "#eff6ff", color: "#1d4ed8",
+    borderColor: "#2563eb", fontWeight: "700",
   },
   sectionHead: {
-    fontSize: "11px", fontWeight: "600", color: "#4a4e63",
+    fontSize: "11px", fontWeight: "700", color: "#64748b",
     letterSpacing: ".06em", textTransform: "uppercase", marginBottom: "10px",
   },
   deptSection: { marginBottom: "1.75rem" },
@@ -38,10 +40,10 @@ const S = {
     display: "flex", alignItems: "center", gap: "10px",
     marginBottom: "10px",
   },
-  deptName: { fontSize: "15px", fontWeight: "600", color: "#f0f0f5" },
+  deptName: { fontSize: "15px", fontWeight: "700", color: "#0f172a" },
   deptCode: {
     fontSize: "11px", padding: "2px 8px", borderRadius: "20px",
-    background: "#23273a", border: "1px solid #2a2d3a", color: "#6b6f85",
+    background: "#e0f2fe", border: "1px solid #bae6fd", color: "#0284c7", fontWeight: "700",
   },
   courseGrid: {
     display: "grid",
@@ -49,43 +51,45 @@ const S = {
     gap: "10px",
   },
   courseCard: {
-    background: "#1a1d27", border: "1px solid #2a2d3a",
-    borderRadius: "12px", padding: "1rem",
+    background: "#ffffff", border: "1px solid #e2e8f0",
+    borderRadius: "14px", padding: "1rem",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.03)",
   },
-  courseName: { fontSize: "14px", fontWeight: "600", color: "#f0f0f5", marginBottom: "4px" },
-  courseMeta: { fontSize: "12px", color: "#6b6f85", marginBottom: "6px" },
+  courseName: { fontSize: "14px", fontWeight: "700", color: "#0f172a", marginBottom: "4px" },
+  courseMeta: { fontSize: "12px", color: "#64748b", marginBottom: "6px" },
   creditBadge: {
     display: "inline-block", fontSize: "11px", padding: "2px 8px",
-    borderRadius: "20px", background: "#1e2535",
-    border: "1px solid #2a3a5a", color: "#60a5fa",
+    borderRadius: "20px", background: "#f1f5f9",
+    border: "1px solid #cbd5e1", color: "#334155", fontWeight: "600",
   },
   activeBadge: {
     display: "inline-block", fontSize: "11px", padding: "2px 8px",
-    borderRadius: "20px", background: "#1a2e1a",
-    border: "1px solid #2a5c2a", color: "#4ade80", marginLeft: "6px",
+    borderRadius: "20px", background: "#ecfdf5",
+    border: "1px solid #a7f3d0", color: "#059669", marginLeft: "6px", fontWeight: "600",
   },
   inactiveBadge: {
     display: "inline-block", fontSize: "11px", padding: "2px 8px",
-    borderRadius: "20px", background: "#2d1a1a",
-    border: "1px solid #5c2a2a", color: "#f87171", marginLeft: "6px",
+    borderRadius: "20px", background: "#fef2f2",
+    border: "1px solid #fecaca", color: "#dc2626", marginLeft: "6px", fontWeight: "600",
   },
   empty: {
     padding: "2rem", textAlign: "center",
-    fontSize: "13px", color: "#4a4e63",
-    background: "#1a1d27", border: "1px solid #2a2d3a",
+    fontSize: "13px", color: "#64748b",
+    background: "#ffffff", border: "1px solid #e2e8f0",
     borderRadius: "12px",
   },
-  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#6b6f85" },
+  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
   statsRow: {
     display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(130px,1fr))",
     gap: "10px", marginBottom: "1.25rem",
   },
   statCard: {
-    background: "#1a1d27", border: "1px solid #2a2d3a",
+    background: "#ffffff", border: "1px solid #e2e8f0",
     borderRadius: "12px", padding: "1rem",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.03)",
   },
-  statValue: { fontSize: "24px", fontWeight: "700", marginBottom: "2px" },
-  statLabel: { fontSize: "12px", color: "#6b6f85" },
+  statValue: { fontSize: "24px", fontWeight: "800", marginBottom: "2px" },
+  statLabel: { fontSize: "12px", color: "#64748b", fontWeight: "600" },
 };
 
 export default function CoursesPage({ role }) {
@@ -144,11 +148,11 @@ export default function CoursesPage({ role }) {
       {/* Stats */}
       <div style={S.statsRow}>
         {[
-          { label: "Total courses",   value: courses.length,      color: "#6366f1" },
-          { label: "Active courses",  value: activeCourses,        color: "#10b981" },
-          { label: "Departments",     value: departments.length,   color: "#f59e0b" },
+          { label: "Total courses",   value: courses.length,      color: "#0284c7" },
+          { label: "Active courses",  value: activeCourses,        color: "#059669" },
+          { label: "Departments",     value: departments.length,   color: "#d97706" },
         ].map(s => (
-          <div key={s.label} style={{ ...S.statCard, borderTop: `2px solid ${s.color}` }}>
+          <div key={s.label} style={{ ...S.statCard, borderTop: `3px solid ${s.color}` }}>
             <div style={{ ...S.statValue, color: s.color }}>{s.value}</div>
             <div style={S.statLabel}>{s.label}</div>
           </div>
@@ -185,7 +189,7 @@ export default function CoursesPage({ role }) {
               <div style={S.deptHeader}>
                 <span style={S.deptName}>{dept.name}</span>
                 <span style={S.deptCode}>{dept.code}</span>
-                <span style={{ fontSize: "12px", color: "#4a4e63" }}>
+                <span style={{ fontSize: "12px", color: "#64748b", fontWeight: "600" }}>
                   {dept.courses.length} course{dept.courses.length !== 1 ? "s" : ""}
                 </span>
               </div>

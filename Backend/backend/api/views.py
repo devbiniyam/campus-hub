@@ -52,8 +52,11 @@ class CourseViewSet(ModelViewSet):
     def get_queryset(self):
         user = self.request.user
 
+        if not user.is_authenticated:
+            return Course.objects.filter(is_active=True)
+
         # ADMIN → full access
-        if user.is_authenticated and (user.role == "ADMIN" or user.is_superuser):
+        if user.role == "ADMIN" or user.is_superuser:
             return Course.objects.all()
 
         # STUDENT → only their department + active courses
@@ -113,6 +116,9 @@ class CourseAssignmentViewSet(ModelViewSet):
     def get_queryset(self):
         user = self.request.user
 
+        if not user.is_authenticated:
+            return CourseAssignment.objects.none()
+
         # Admin → all
         if user.role == "ADMIN":
             return CourseAssignment.objects.select_related("course", "teacher", "semester")
@@ -149,6 +155,9 @@ class EnrollmentViewSet(ModelViewSet):
     # --------------------------------------------------------
     def get_queryset(self):
         user = self.request.user
+
+        if not user.is_authenticated:
+            return Enrollment.objects.none()
 
         # Admin → all enrollments
         if user.role == "ADMIN":
@@ -191,6 +200,9 @@ class GradeSubmissionViewSet(ModelViewSet):
     # --------------------------------------------------------
     def get_queryset(self):
         user = self.request.user
+
+        if not user.is_authenticated:
+            return GradeSubmission.objects.none()
 
         # ADMIN → see all
         if user.role == "ADMIN":
@@ -329,6 +341,9 @@ class SectionViewSet(ModelViewSet):
     def get_queryset(self):
         user = self.request.user
 
+        if not user.is_authenticated:
+            return Section.objects.none()
+
         # ADMIN → see all
         if user.role == "ADMIN":
             return Section.objects.all()
@@ -355,6 +370,9 @@ class SectionAssignmentViewSet(ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
+
+        if not user.is_authenticated:
+            return SectionAssignment.objects.none()
 
         # ADMIN → all assignments
         if user.role == "ADMIN":
@@ -386,6 +404,9 @@ class AcademicStatusViewSet(ModelViewSet):
     # --------------------------------------------------------
     def get_queryset(self):
         user = self.request.user
+
+        if not user.is_authenticated:
+            return self.queryset.none()
 
         # ADMIN → sees everything
         if user.role == "ADMIN":

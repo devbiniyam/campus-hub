@@ -4,29 +4,39 @@ import { apiFetch } from "./api";
 const S = {
   wrap: { animation: "fadeUp .4s ease both" },
   statsRow: { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(130px,1fr))", gap: "12px", marginBottom: "1.25rem" },
-  statCard: { background: "#1a1d27", border: "1px solid #2a2d3a", borderRadius: "12px", padding: "1rem" },
-  statValue: { fontSize: "26px", fontWeight: "700", marginBottom: "2px" },
-  statLabel: { fontSize: "12px", color: "#6b6f85" },
-  sectionHead: { fontSize: "11px", fontWeight: "600", color: "#4a4e63", letterSpacing: ".06em", textTransform: "uppercase", marginBottom: "10px" },
-  semCard: { background: "#1a1d27", border: "1px solid #2a2d3a", borderRadius: "12px", overflow: "hidden", marginBottom: "1rem" },
-  semHeader: { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 16px", borderBottom: "1px solid #2a2d3a", background: "#1e2235", flexWrap: "wrap", gap: "8px" },
-  semName: { fontSize: "14px", fontWeight: "600", color: "#f0f0f5" },
-  gpaChip: (v) => ({ fontSize: "12px", fontWeight: "700", padding: "3px 10px", borderRadius: "20px", background: v >= 3.5 ? "#1a2e1a" : v >= 2.5 ? "#1e2535" : v >= 2.0 ? "#2a2310" : "#2d1a1a", border: `1px solid ${v >= 3.5 ? "#2a5c2a" : v >= 2.5 ? "#2a4060" : v >= 2.0 ? "#4a3a10" : "#5c2a2a"}`, color: v >= 3.5 ? "#4ade80" : v >= 2.5 ? "#60a5fa" : v >= 2.0 ? "#fbbf24" : "#f87171" }),
-  tableHeader: { display: "grid", gridTemplateColumns: "1fr 80px 80px", padding: "8px 16px", fontSize: "11px", color: "#4a4e63", fontWeight: "600", borderBottom: "1px solid #2a2d3a" },
-  tableRow: { display: "grid", gridTemplateColumns: "1fr 80px 80px", padding: "10px 16px", borderBottom: "1px solid #1e2130", fontSize: "13px", color: "#c8cad8", alignItems: "center" },
-  grade: { fontWeight: "700" },
-  empty: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#4a4e63" },
-  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#6b6f85" },
-  statusBadge: (s) => ({ fontSize: "11px", padding: "2px 8px", borderRadius: "20px", fontWeight: "500", background: s === "ACTIVE" ? "#1a2e1a" : s === "PROBATION" ? "#2a2310" : "#2d1a1a", border: `1px solid ${s === "ACTIVE" ? "#2a5c2a" : s === "PROBATION" ? "#4a3a10" : "#5c2a2a"}`, color: s === "ACTIVE" ? "#4ade80" : s === "PROBATION" ? "#fbbf24" : "#f87171" }),
+  statCard: { background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "14px", padding: "1.25rem", boxShadow: "0 2px 8px rgba(0,0,0,0.03)" },
+  statValue: { fontSize: "26px", fontWeight: "800", marginBottom: "2px" },
+  statLabel: { fontSize: "12px", color: "#64748b", fontWeight: "600" },
+  sectionHead: { fontSize: "11px", fontWeight: "700", color: "#475569", letterSpacing: ".06em", textTransform: "uppercase", marginBottom: "10px" },
+  semCard: { background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "14px", overflow: "hidden", marginBottom: "1rem", boxShadow: "0 2px 10px rgba(0,0,0,0.04)" },
+  semHeader: { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 16px", borderBottom: "1px solid #e2e8f0", background: "#f8fafc", flexWrap: "wrap", gap: "8px" },
+  semName: { fontSize: "14px", fontWeight: "700", color: "#0f172a" },
+  gpaChip: (v) => ({
+    fontSize: "12px", fontWeight: "700", padding: "3px 10px", borderRadius: "20px",
+    background: v >= 3.5 ? "#ecfdf5" : v >= 2.5 ? "#f0f9ff" : v >= 2.0 ? "#fffbeb" : "#fef2f2",
+    border: `1px solid ${v >= 3.5 ? "#a7f3d0" : v >= 2.5 ? "#bae6fd" : v >= 2.0 ? "#fde68a" : "#fecaca"}`,
+    color: v >= 3.5 ? "#059669" : v >= 2.5 ? "#0284c7" : v >= 2.0 ? "#d97706" : "#dc2626",
+  }),
+  tableHeader: { display: "grid", gridTemplateColumns: "1fr 80px 80px", padding: "12px 16px", fontSize: "11px", color: "#475569", fontWeight: "700", textTransform: "uppercase", borderBottom: "1px solid #e2e8f0", background: "#f8fafc" },
+  tableRow: { display: "grid", gridTemplateColumns: "1fr 80px 80px", padding: "12px 16px", borderBottom: "1px solid #f1f5f9", fontSize: "13px", color: "#1e293b", alignItems: "center" },
+  grade: { fontWeight: "800" },
+  empty: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
+  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
+  statusBadge: (s) => ({
+    fontSize: "11px", padding: "3px 10px", borderRadius: "20px", fontWeight: "700",
+    background: s === "ACTIVE" ? "#ecfdf5" : s === "PROBATION" ? "#fffbeb" : "#fef2f2",
+    border: `1px solid ${s === "ACTIVE" ? "#a7f3d0" : s === "PROBATION" ? "#fde68a" : "#fecaca"}`,
+    color: s === "ACTIVE" ? "#059669" : s === "PROBATION" ? "#d97706" : "#dc2626",
+  }),
 };
 
 function gradeColor(g) {
-  if (!g) return "#6b6f85";
-  if (["A+","A","A-"].includes(g)) return "#4ade80";
-  if (["B+","B","B-"].includes(g)) return "#60a5fa";
-  if (["C+","C","C-"].includes(g)) return "#fbbf24";
-  if (g === "D") return "#fb923c";
-  return "#f87171";
+  if (!g) return "#64748b";
+  if (["A+","A","A-"].includes(g)) return "#059669";
+  if (["B+","B","B-"].includes(g)) return "#0284c7";
+  if (["C+","C","C-"].includes(g)) return "#d97706";
+  if (g === "D") return "#ea580c";
+  return "#dc2626";
 }
 
 export default function GradesHistoryPage() {
@@ -67,12 +77,12 @@ export default function GradesHistoryPage() {
 
       <div style={S.statsRow}>
         {[
-          { label: "Cumulative GPA", value: cumGpa ?? "—",          color: cumGpa >= 3.5 ? "#4ade80" : cumGpa >= 2.0 ? "#60a5fa" : "#f87171" },
-          { label: "Courses graded", value: gradedEnrollments.length, color: "#6366f1" },
-          { label: "Semesters",      value: bySemester.length,        color: "#f59e0b" },
-          { label: "Standing",       value: latestStatus?.status ?? "—", color: latestStatus?.status === "ACTIVE" ? "#4ade80" : latestStatus?.status === "PROBATION" ? "#fbbf24" : "#f87171" },
+          { label: "Cumulative GPA", value: cumGpa ?? "—",          color: cumGpa >= 3.5 ? "#059669" : cumGpa >= 2.0 ? "#0284c7" : "#dc2626" },
+          { label: "Courses graded", value: gradedEnrollments.length, color: "#0284c7" },
+          { label: "Semesters",      value: bySemester.length,        color: "#d97706" },
+          { label: "Standing",       value: latestStatus?.status ?? "—", color: latestStatus?.status === "ACTIVE" ? "#059669" : latestStatus?.status === "PROBATION" ? "#d97706" : "#dc2626" },
         ].map(s => (
-          <div key={s.label} style={{ ...S.statCard, borderTop: `2px solid ${s.color}` }}>
+          <div key={s.label} style={{ ...S.statCard, borderTop: `3px solid ${s.color}` }}>
             <div style={{ ...S.statValue, color: s.color }}>{String(s.value)}</div>
             <div style={S.statLabel}>{s.label}</div>
           </div>
@@ -82,7 +92,7 @@ export default function GradesHistoryPage() {
       <div style={S.sectionHead}>Grade history by semester</div>
 
       {bySemester.length === 0
-        ? <div style={{ background: "#1a1d27", border: "1px solid #2a2d3a", borderRadius: "12px", padding: "2rem", textAlign: "center", fontSize: "13px", color: "#4a4e63" }}>
+        ? <div style={{ background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "14px", padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" }}>
             No grades recorded yet.
           </div>
         : bySemester.map(sem => {
@@ -96,19 +106,19 @@ export default function GradesHistoryPage() {
                     {status && <span style={S.statusBadge(status)}>{status}</span>}
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                    <span style={{ fontSize: "12px", color: "#6b6f85" }}>Semester GPA:</span>
+                    <span style={{ fontSize: "12px", color: "#64748b", fontWeight: "600" }}>Semester GPA:</span>
                     {gpa
                       ? <span style={S.gpaChip(parseFloat(gpa))}>{gpa}</span>
-                      : <span style={{ fontSize: "12px", color: "#4a4e63" }}>Not calculated yet</span>
+                      : <span style={{ fontSize: "12px", color: "#94a3b8" }}>Not calculated yet</span>
                     }
                   </div>
                 </div>
                 <div style={S.tableHeader}><span>Course</span><span>Credits</span><span>Grade</span></div>
                 {sem.enrollments.map(e => (
                   <div key={e.id} style={S.tableRow}>
-                    <span style={{ color: "#e2e4f0" }}>{e.course_name || `Course #${e.course}`}</span>
-                    <span style={{ color: "#9ca0b8" }}>—</span>
-                    <span style={{ ...S.grade, color: gradeColor(e.grade) }}>{e.grade || <span style={{ color: "#4a4e63" }}>Pending</span>}</span>
+                    <span style={{ color: "#0f172a", fontWeight: "600" }}>{e.course_name || `Course #${e.course}`}</span>
+                    <span style={{ color: "#64748b" }}>—</span>
+                    <span style={{ ...S.grade, color: gradeColor(e.grade) }}>{e.grade || <span style={{ color: "#d97706" }}>Pending</span>}</span>
                   </div>
                 ))}
               </div>

@@ -1,9 +1,19 @@
-const BASE = "http://localhost:8000/api";
+// Dynamic API Base resolution:
+// 1. REACT_APP_API_BASE environment variable (e.g., in production Vercel deployment)
+// 2. Fallback to http://localhost:8000/api for local dev
+// 3. Fallback to /api for reverse proxy or unified container deployment
+export const API_BASE =
+  process.env.REACT_APP_API_BASE ||
+  (typeof window !== "undefined" && window.location && window.location.hostname === "localhost"
+    ? "http://localhost:8000/api"
+    : "/api");
 
 export async function apiFetch(path, options = {}) {
   const token = localStorage.getItem("access_token");
 
-  const res = await fetch(`${BASE}${path}`, {
+  const url = path.startsWith("http") ? path : `${API_BASE}${path}`;
+
+  const res = await fetch(url, {
     ...options,
     headers: {
       "Content-Type": "application/json",
@@ -12,9 +22,10 @@ export async function apiFetch(path, options = {}) {
     },
   });
 
-  if (res.status === 401) {
-    localStorage.clear();
-    window.location.reload();
+  if (res.status === 401 && !path.includes("/auth/login/")) {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    // Only reload if we are not already on unauthenticated view
   }
 
   return res;
@@ -26,4 +37,22 @@ export function parseToken(token) {
   } catch {
     return null;
   }
+}
+
+export async function demoLogin(username, password) {
+  const res = await fetch(`${API_BASE}/auth/login/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password }),
+  });
+
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(data.detail || "Authentication failed.");
+  }
+
+  const data = await res.json();
+  localStorage.setItem("access_token", data.access);
+  localStorage.setItem("refresh_token", data.refresh);
+  return data;
 }

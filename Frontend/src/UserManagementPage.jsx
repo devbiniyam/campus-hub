@@ -4,50 +4,43 @@ import { apiFetch } from "./api";
 const S = {
   wrap: { animation: "fadeUp .4s ease both" },
   topRow: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.25rem", flexWrap: "wrap", gap: "10px" },
-  addBtn: { fontSize: "13px", padding: "8px 16px", borderRadius: "10px", border: "none", background: "linear-gradient(135deg,#6366f1,#8b5cf6)", color: "#fff", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "600" },
+  addBtn: { fontSize: "13px", padding: "8px 16px", borderRadius: "10px", border: "none", background: "linear-gradient(135deg, #1d4ed8, #2563eb)", color: "#fff", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "700", boxShadow: "0 2px 8px rgba(37, 99, 235, 0.25)" },
   filterRow: { display: "flex", gap: "8px", marginBottom: "1.25rem", flexWrap: "wrap" },
-  filterBtn: { fontSize: "12px", padding: "6px 14px", borderRadius: "20px", border: "1px solid #2a2d3a", background: "transparent", color: "#9ca0b8", cursor: "pointer", fontFamily: "'DM Sans', sans-serif" },
-  filterBtnActive: { background: "#23273a", color: "#f0f0f5", borderColor: "#4a4e63" },
-  tableCard: { background: "#1a1d27", border: "1px solid #2a2d3a", borderRadius: "12px", overflow: "hidden", marginBottom: "1.25rem" },
-  tableHeader: { display: "grid", gridTemplateColumns: "1fr 100px 120px 100px 120px", padding: "8px 14px", borderBottom: "1px solid #2a2d3a", fontSize: "11px", color: "#4a4e63", fontWeight: "600" },
-  tableRow: { display: "grid", gridTemplateColumns: "1fr 100px 120px 100px 120px", padding: "10px 14px", borderBottom: "1px solid #1e2130", fontSize: "13px", color: "#c8cad8", alignItems: "center" },
-  roleBadge: (r) => ({ fontSize: "11px", padding: "2px 8px", borderRadius: "20px", fontWeight: "500", background: r === "STUDENT" ? "#1e1f3a" : r === "TEACHER" ? "#1a2e1a" : "#2a1e08", border: `1px solid ${r === "STUDENT" ? "#3a3a8a" : r === "TEACHER" ? "#2a5c2a" : "#5a3a10"}`, color: r === "STUDENT" ? "#818cf8" : r === "TEACHER" ? "#4ade80" : "#f59e0b" }),
-  actionBtn: { fontSize: "11px", padding: "3px 8px", borderRadius: "6px", border: "1px solid", cursor: "pointer", fontWeight: "500", background: "transparent", fontFamily: "'DM Sans', sans-serif", marginRight: "4px" },
+  filterBtn: { fontSize: "12px", padding: "6px 14px", borderRadius: "20px", border: "1px solid #cbd5e1", background: "#ffffff", color: "#475569", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "600", transition: "all .15s ease" },
+  filterBtnActive: { background: "#eff6ff", color: "#1d4ed8", borderColor: "#2563eb", fontWeight: "700" },
+  tableCard: { background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "14px", overflow: "hidden", marginBottom: "1.25rem", boxShadow: "0 2px 10px rgba(0,0,0,0.04)" },
+  tableHeader: { display: "grid", gridTemplateColumns: "1fr 100px 120px 100px 120px", padding: "12px 14px", borderBottom: "1px solid #e2e8f0", background: "#f8fafc", fontSize: "11px", color: "#475569", fontWeight: "700", textTransform: "uppercase" },
+  tableRow: { display: "grid", gridTemplateColumns: "1fr 100px 120px 100px 120px", padding: "12px 14px", borderBottom: "1px solid #f1f5f9", fontSize: "13px", color: "#1e293b", alignItems: "center" },
+  roleBadge: (r) => ({
+    fontSize: "11px", padding: "3px 10px", borderRadius: "20px", fontWeight: "700",
+    background: r === "STUDENT" ? "#e0f2fe" : r === "TEACHER" ? "#ecfdf5" : "#fffbeb",
+    border: `1px solid ${r === "STUDENT" ? "#bae6fd" : r === "TEACHER" ? "#a7f3d0" : "#fde68a"}`,
+    color: r === "STUDENT" ? "#0284c7" : r === "TEACHER" ? "#059669" : "#d97706",
+  }),
+  actionBtn: { fontSize: "11px", padding: "5px 12px", borderRadius: "6px", border: "1px solid", cursor: "pointer", fontWeight: "700", background: "transparent", fontFamily: "'DM Sans', sans-serif", marginRight: "6px" },
   modal: {
-  position: "fixed",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  background: "rgba(0,0,0,0.7)",
-  display: "flex",
-  alignItems: "flex-start",
-  justifyContent: "center",
-  overflowY: "auto",
-  zIndex: 200,
-  padding: "2rem 1rem",
-},
+    position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+    background: "rgba(15, 23, 42, 0.45)", backdropFilter: "blur(4px)",
+    display: "flex", alignItems: "flex-start", justifyContent: "center",
+    overflowY: "auto", zIndex: 200, padding: "2rem 1rem",
+  },
   modalCard: {
-  background: "#1a1d27",
-  border: "1px solid #2a2d3a",
-  borderRadius: "16px",
-  padding: "1.5rem",
-  width: "100%",
-  maxWidth: "460px",
-  marginTop: "1rem",
-},
-  modalTitle: { fontSize: "16px", fontWeight: "700", color: "#f0f0f5", marginBottom: "1.25rem" },
-  label: { fontSize: "12px", color: "#9ca0b8", marginBottom: "4px", display: "block" },
-  input: { background: "#0f1117", border: "1px solid #2a2d3a", borderRadius: "8px", padding: "8px 12px", color: "#f0f0f5", fontSize: "13px", width: "100%", fontFamily: "'DM Sans', sans-serif", outline: "none", boxSizing: "border-box", marginBottom: "12px" },
-  select: { background: "#0f1117", border: "1px solid #2a2d3a", borderRadius: "8px", padding: "8px 12px", color: "#f0f0f5", fontSize: "13px", width: "100%", fontFamily: "'DM Sans', sans-serif", outline: "none", boxSizing: "border-box", marginBottom: "12px" },
+    background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px",
+    padding: "1.5rem", width: "100%", maxWidth: "460px", marginTop: "1rem",
+    boxShadow: "0 20px 50px rgba(0,0,0,0.15)",
+  },
+  modalTitle: { fontSize: "16px", fontWeight: "800", color: "#0f172a", marginBottom: "1.25rem" },
+  label: { fontSize: "12px", color: "#475569", marginBottom: "4px", display: "block", fontWeight: "700" },
+  input: { background: "#ffffff", border: "1px solid #cbd5e1", borderRadius: "8px", padding: "8px 12px", color: "#0f172a", fontSize: "13px", width: "100%", fontFamily: "'DM Sans', sans-serif", outline: "none", boxSizing: "border-box", marginBottom: "12px" },
+  select: { background: "#ffffff", border: "1px solid #cbd5e1", borderRadius: "8px", padding: "8px 12px", color: "#0f172a", fontSize: "13px", width: "100%", fontFamily: "'DM Sans', sans-serif", outline: "none", boxSizing: "border-box", marginBottom: "12px" },
   row2: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" },
   modalBtns: { display: "flex", gap: "8px", justifyContent: "flex-end", marginTop: "4px" },
-  cancelBtn: { fontSize: "13px", padding: "8px 16px", borderRadius: "8px", border: "1px solid #2a2d3a", color: "#9ca0b8", background: "transparent", cursor: "pointer", fontFamily: "'DM Sans', sans-serif" },
-  saveBtn: { fontSize: "13px", padding: "8px 20px", borderRadius: "8px", border: "none", color: "#fff", background: "linear-gradient(135deg,#6366f1,#8b5cf6)", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "600" },
-  error: { background: "#2d1a1a", border: "1px solid #5c2a2a", borderRadius: "8px", padding: "8px 12px", fontSize: "12px", color: "#f87171", marginBottom: "12px" },
-  toast: { position: "fixed", bottom: "20px", right: "20px", borderRadius: "10px", padding: "10px 16px", fontSize: "13px", zIndex: 300 },
-  empty: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#4a4e63" },
-  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#6b6f85" },
+  cancelBtn: { fontSize: "13px", padding: "8px 16px", borderRadius: "8px", border: "1px solid #cbd5e1", color: "#64748b", background: "#ffffff", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "600" },
+  saveBtn: { fontSize: "13px", padding: "8px 20px", borderRadius: "8px", border: "none", color: "#fff", background: "linear-gradient(135deg, #1d4ed8, #2563eb)", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "700", boxShadow: "0 2px 8px rgba(37, 99, 235, 0.25)" },
+  error: { background: "#fef2f2", border: "1px solid #fecaca", borderRadius: "8px", padding: "8px 12px", fontSize: "12px", color: "#dc2626", marginBottom: "12px", fontWeight: "600" },
+  toast: { position: "fixed", bottom: "20px", right: "20px", borderRadius: "10px", padding: "10px 16px", fontSize: "13px", zIndex: 300, fontWeight: "700" },
+  empty: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
+  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
 };
 
 const EMPTY_FORM = { username: "", password: "", first_name: "", last_name: "", email: "", role: "STUDENT", student_id: "", staff_id: "", department: "", gender: "MALE", date_of_birth: "" };
@@ -159,7 +152,7 @@ export default function UserManagementPage() {
       )}
 
       <div style={S.topRow}>
-        <span style={{ fontSize: "15px", fontWeight: "600", color: "#f0f0f5" }}>Users ({users.length})</span>
+        <span style={{ fontSize: "15px", fontWeight: "700", color: "#0f172a" }}>Users ({users.length})</span>
         <button style={S.addBtn} onClick={openAdd}>+ Add user</button>
       </div>
 
@@ -175,13 +168,13 @@ export default function UserManagementPage() {
           ? <div style={S.empty}>No users found.</div>
           : filtered.map(u => (
               <div key={u.id} style={S.tableRow}>
-                <span style={{ color: "#e2e4f0", fontWeight: "500" }}>{u.first_name} {u.last_name}</span>
-                <span style={{ color: "#9ca0b8" }}>@{u.username}</span>
-                <span style={{ color: "#9ca0b8", fontSize: "12px" }}>{departments.find(d => d.id === u.department)?.name || "—"}</span>
+                <span style={{ color: "#0f172a", fontWeight: "600" }}>{u.first_name} {u.last_name}</span>
+                <span style={{ color: "#0284c7", fontWeight: "600" }}>@{u.username}</span>
+                <span style={{ color: "#64748b", fontSize: "12px", fontWeight: "500" }}>{departments.find(d => d.id === u.department)?.name || "—"}</span>
                 <span><span style={S.roleBadge(u.role)}>{u.role}</span></span>
                 <span>
-                  <button style={{ ...S.actionBtn, borderColor: "#2a3a5a", color: "#60a5fa" }} onClick={() => openEdit(u)}>Edit</button>
-                  <button style={{ ...S.actionBtn, borderColor: "#5c2a2a", color: "#f87171" }} onClick={() => handleDelete(u.id)}>Delete</button>
+                  <button style={{ ...S.actionBtn, borderColor: "#bae6fd", color: "#0284c7", background: "#f0f9ff" }} onClick={() => openEdit(u)}>Edit</button>
+                  <button style={{ ...S.actionBtn, borderColor: "#fecaca", color: "#dc2626", background: "#fef2f2" }} onClick={() => handleDelete(u.id)}>Delete</button>
                 </span>
               </div>
             ))}

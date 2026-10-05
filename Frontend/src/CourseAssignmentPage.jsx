@@ -4,45 +4,33 @@ import { apiFetch } from "./api";
 const S = {
   wrap: { animation: "fadeUp .4s ease both" },
   topRow: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.25rem", flexWrap: "wrap", gap: "10px" },
-  addBtn: { fontSize: "13px", padding: "8px 16px", borderRadius: "10px", border: "none", background: "linear-gradient(135deg,#6366f1,#8b5cf6)", color: "#fff", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "600" },
-  tableCard: { background: "#1a1d27", border: "1px solid #2a2d3a", borderRadius: "12px", overflow: "hidden", marginBottom: "1.25rem" },
-  tableHeader: { display: "grid", padding: "8px 14px", borderBottom: "1px solid #2a2d3a", fontSize: "11px", color: "#4a4e63", fontWeight: "600" },
-  tableRow: { display: "grid", padding: "10px 14px", borderBottom: "1px solid #1e2130", fontSize: "13px", color: "#c8cad8", alignItems: "center" },
-  actionBtn: { fontSize: "11px", padding: "3px 8px", borderRadius: "6px", border: "1px solid", cursor: "pointer", fontWeight: "500", background: "transparent", fontFamily: "'DM Sans', sans-serif", marginRight: "4px" },
+  addBtn: { fontSize: "13px", padding: "8px 16px", borderRadius: "10px", border: "none", background: "linear-gradient(135deg, #1d4ed8, #2563eb)", color: "#fff", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "700", boxShadow: "0 2px 8px rgba(37, 99, 235, 0.25)" },
+  tableCard: { background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "14px", overflow: "hidden", marginBottom: "1.25rem", boxShadow: "0 2px 10px rgba(0,0,0,0.04)" },
+  tableHeader: { display: "grid", padding: "12px 14px", borderBottom: "1px solid #e2e8f0", background: "#f8fafc", fontSize: "11px", color: "#475569", fontWeight: "700", textTransform: "uppercase" },
+  tableRow: { display: "grid", padding: "12px 14px", borderBottom: "1px solid #f1f5f9", fontSize: "13px", color: "#1e293b", alignItems: "center" },
+  actionBtn: { fontSize: "11px", padding: "5px 12px", borderRadius: "6px", border: "1px solid", cursor: "pointer", fontWeight: "700", background: "transparent", fontFamily: "'DM Sans', sans-serif", marginRight: "6px" },
   modal: {
-  position: "fixed",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  background: "rgba(0,0,0,0.7)",
-  display: "flex",
-  alignItems: "flex-start",
-  justifyContent: "center",
-  overflowY: "auto",
-  zIndex: 200,
-  padding: "2rem 1rem",
-},
+    position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+    background: "rgba(15, 23, 42, 0.45)", backdropFilter: "blur(4px)",
+    display: "flex", alignItems: "flex-start", justifyContent: "center",
+    overflowY: "auto", zIndex: 200, padding: "2rem 1rem",
+  },
   modalCard: {
-  background: "#1a1d27",
-  border: "1px solid #2a2d3a",
-  borderRadius: "16px",
-  padding: "1.5rem",
-  width: "100%",
-  maxWidth: "460px",
-  marginTop: "1rem",
-},
-  modalTitle: { fontSize: "16px", fontWeight: "700", color: "#f0f0f5", marginBottom: "1.25rem" },
-  label: { fontSize: "12px", color: "#9ca0b8", marginBottom: "4px", display: "block" },
-  select: { background: "#0f1117", border: "1px solid #2a2d3a", borderRadius: "8px", padding: "8px 12px", color: "#f0f0f5", fontSize: "13px", width: "100%", fontFamily: "'DM Sans', sans-serif", outline: "none", boxSizing: "border-box", marginBottom: "12px" },
-  input: { background: "#0f1117", border: "1px solid #2a2d3a", borderRadius: "8px", padding: "8px 12px", color: "#f0f0f5", fontSize: "13px", width: "100%", fontFamily: "'DM Sans', sans-serif", outline: "none", boxSizing: "border-box", marginBottom: "12px" },
+    background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "16px",
+    padding: "1.5rem", width: "100%", maxWidth: "460px", marginTop: "1rem",
+    boxShadow: "0 20px 50px rgba(0,0,0,0.15)",
+  },
+  modalTitle: { fontSize: "16px", fontWeight: "800", color: "#0f172a", marginBottom: "1.25rem" },
+  label: { fontSize: "12px", color: "#475569", marginBottom: "4px", display: "block", fontWeight: "700" },
+  select: { background: "#ffffff", border: "1px solid #cbd5e1", borderRadius: "8px", padding: "8px 12px", color: "#0f172a", fontSize: "13px", width: "100%", fontFamily: "'DM Sans', sans-serif", outline: "none", boxSizing: "border-box", marginBottom: "12px" },
+  input: { background: "#ffffff", border: "1px solid #cbd5e1", borderRadius: "8px", padding: "8px 12px", color: "#0f172a", fontSize: "13px", width: "100%", fontFamily: "'DM Sans', sans-serif", outline: "none", boxSizing: "border-box", marginBottom: "12px" },
   modalBtns: { display: "flex", gap: "8px", justifyContent: "flex-end", marginTop: "4px" },
-  cancelBtn: { fontSize: "13px", padding: "8px 16px", borderRadius: "8px", border: "1px solid #2a2d3a", color: "#9ca0b8", background: "transparent", cursor: "pointer", fontFamily: "'DM Sans', sans-serif" },
-  saveBtn: { fontSize: "13px", padding: "8px 20px", borderRadius: "8px", border: "none", color: "#fff", background: "linear-gradient(135deg,#6366f1,#8b5cf6)", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "600" },
-  error: { background: "#2d1a1a", border: "1px solid #5c2a2a", borderRadius: "8px", padding: "8px 12px", fontSize: "12px", color: "#f87171", marginBottom: "12px" },
-  toast: { position: "fixed", bottom: "20px", right: "20px", borderRadius: "10px", padding: "10px 16px", fontSize: "13px", zIndex: 300 },
-  empty: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#4a4e63" },
-  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#6b6f85" },
+  cancelBtn: { fontSize: "13px", padding: "8px 16px", borderRadius: "8px", border: "1px solid #cbd5e1", color: "#64748b", background: "#ffffff", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "600" },
+  saveBtn: { fontSize: "13px", padding: "8px 20px", borderRadius: "8px", border: "none", color: "#fff", background: "linear-gradient(135deg, #1d4ed8, #2563eb)", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "700", boxShadow: "0 2px 8px rgba(37, 99, 235, 0.25)" },
+  error: { background: "#fef2f2", border: "1px solid #fecaca", borderRadius: "8px", padding: "8px 12px", fontSize: "12px", color: "#dc2626", marginBottom: "12px", fontWeight: "600" },
+  toast: { position: "fixed", bottom: "20px", right: "20px", borderRadius: "10px", padding: "10px 16px", fontSize: "13px", zIndex: 300, fontWeight: "700" },
+  empty: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
+  loading: { padding: "2rem", textAlign: "center", fontSize: "13px", color: "#64748b" },
 };
 
 const EMPTY = { course: "", teacher: "", semester: "", teaching_role: "Lecturer" };
@@ -98,7 +86,7 @@ export default function CourseAssignmentPage() {
   return (
     <div style={S.wrap}>
       <style>{`@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}`}</style>
-      {toast.msg && <div style={{ ...S.toast, background: toast.isError ? "#2d1a1a" : "#1a2e1a", border: `1px solid ${toast.isError ? "#5c2a2a" : "#2a5c2a"}`, color: toast.isError ? "#f87171" : "#4ade80" }}>{toast.isError ? "⚠️" : "✓"} {toast.msg}</div>}
+      {toast.msg && <div style={{ ...S.toast, background: toast.isError ? "#fef2f2" : "#f0fdf4", border: `1px solid ${toast.isError ? "#fecaca" : "#bbf7d0"}`, color: toast.isError ? "#dc2626" : "#16a34a" }}>{toast.isError ? "⚠️" : "✓"} {toast.msg}</div>}
 
       {modal && (
         <div style={S.modal} onClick={e => e.target === e.currentTarget && setModal(false)}>
@@ -131,7 +119,7 @@ export default function CourseAssignmentPage() {
       )}
 
       <div style={S.topRow}>
-        <span style={{ fontSize: "15px", fontWeight: "600", color: "#f0f0f5" }}>Course Assignments ({assignments.length})</span>
+        <span style={{ fontSize: "15px", fontWeight: "700", color: "#0f172a" }}>Course Assignments ({assignments.length})</span>
         <button style={S.addBtn} onClick={() => { setForm(EMPTY); setError(""); setModal(true); }}>+ Assign teacher</button>
       </div>
 
@@ -146,11 +134,11 @@ export default function CourseAssignmentPage() {
             const sem     = semesters.find(s => s.id === a.semester);
             return (
               <div key={a.id} style={{ ...S.tableRow, gridTemplateColumns: "1fr 1fr 120px 80px 80px" }}>
-                <span style={{ color: "#e2e4f0" }}>{course?.name || `Course #${a.course}`}</span>
-                <span style={{ color: "#9ca0b8" }}>{teacher ? `${teacher.first_name} ${teacher.last_name}` : `Teacher #${a.teacher}`}</span>
-                <span style={{ color: "#9ca0b8", fontSize: "12px" }}>{sem ? `${sem.name} ${sem.year}` : `Sem #${a.semester}`}</span>
-                <span style={{ color: "#6b6f85", fontSize: "12px" }}>{a.teaching_role}</span>
-                <span><button style={{ ...S.actionBtn, borderColor: "#5c2a2a", color: "#f87171" }} onClick={() => handleDelete(a.id)}>Delete</button></span>
+                <span style={{ color: "#0f172a", fontWeight: "600" }}>{course?.name || `Course #${a.course}`}</span>
+                <span style={{ color: "#059669", fontWeight: "600" }}>{teacher ? `${teacher.first_name} ${teacher.last_name}` : `Teacher #${a.teacher}`}</span>
+                <span style={{ color: "#64748b", fontSize: "12px" }}>{sem ? `${sem.name} ${sem.year}` : `Sem #${a.semester}`}</span>
+                <span style={{ color: "#475569", fontSize: "12px", background: "#f1f5f9", padding: "2px 8px", borderRadius: "6px", width: "fit-content" }}>{a.teaching_role}</span>
+                <span><button style={{ ...S.actionBtn, borderColor: "#fecaca", background: "#fef2f2", color: "#dc2626" }} onClick={() => handleDelete(a.id)}>Delete</button></span>
               </div>
             );
           })}
