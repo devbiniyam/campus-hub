@@ -12,7 +12,7 @@
 [![SimpleJWT](https://img.shields.io/badge/Auth-SimpleJWT_Bearer-orange?style=for-the-badge)](https://django-rest-framework-simplejwt.readthedocs.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-[Architecture](#architecture--system-design) • [Interactive Demos](#interactive-demo-testing) • [Cloud Deployment ("Deploy as New")](#cloud-deployment-guide-deploy-as-new) • [Local Setup](#local-development-setup) • [API Reference](#api-reference)
+[Architecture](#architecture--system-design) • [Interactive Demos](#interactive-demo-testing) • [Local Setup](#local-development-setup) • [API Reference](#api-reference)
 
 </div>
 
@@ -27,10 +27,6 @@
 - [Architecture & System Design](#architecture--system-design)
 - [Features by Role](#features-by-role)
 - [Academic Rules Engine](#academic-rules-engine)
-- [Cloud Deployment Guide ("Deploy as New")](#cloud-deployment-guide-deploy-as-new)
-  - [Option A: 1-Click Render Blueprint (Full-Stack + PostgreSQL)](#option-a-1-click-render-blueprint-full-stack--postgresql)
-  - [Option B: Hybrid Cloud (Render Backend + Vercel Frontend)](#option-b-hybrid-cloud-render-backend--vercel-frontend)
-  - [Environment Variables Matrix](#environment-variables-matrix)
 - [Local Development Setup](#local-development-setup)
   - [Backend Setup](#backend-setup)
   - [Frontend Setup](#frontend-setup)
@@ -381,57 +377,6 @@ Expected result:
 Ran 6 tests in ~15s
 OK
 ```
-
----
-
-## 🚀 Cloud Deployment Guide ("Deploy as New")
-
-Deploying Campus Hub to production as a brand-new instance takes under 3 minutes using the included infrastructure blueprints.
-
-### Option A: 1-Click Render Blueprint (Full-Stack + PostgreSQL)
-
-The included root `render.yaml` orchestrates the managed PostgreSQL database, Django backend, and React static frontend automatically.
-
-1. Fork or push this repository to your GitHub account: `https://github.com/devbiniyam/campus-hub`.
-2. Log into the [Render Dashboard](https://dashboard.render.com/).
-3. Click **New +** ➔ **Blueprint**.
-4. Connect your GitHub repository.
-5. Render will automatically detect `render.yaml` and provision:
-   - 🐘 **Managed PostgreSQL Database** (`campus-hub-db`)
-   - 🐍 **Python Web Service** (`campus-hub-backend`)
-     - Build: `bash ./build.sh` (installs packages, runs migrations, collects static files via WhiteNoise, and seeds all 4 demo accounts)
-     - Start: `gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT`
-   - ⚛️ **Static Site** (`campus-hub-frontend`)
-     - Root: `Frontend`
-     - Build: `npm install && npm run build`
-     - Publish: `./build`
-6. Click **Apply**. Once built, your academic portal is live with database persistence and pre-seeded demo accounts!
-
----
-
-### Option B: Hybrid Cloud (Render Backend + Vercel Frontend)
-
-#### 1. Backend on Render:
-- Create a **PostgreSQL Database** on Render (`campus-hub-db`).
-- Create a **Web Service** pointing to your repository:
-  - **Root Directory**: `Backend/backend`
-  - **Runtime**: `Python`
-  - **Build Command**: `bash ./build.sh`
-  - **Start Command**: `gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT`
-  - **Environment Variables**:
-    - `DATABASE_URL`: *(Connection string from your Render PostgreSQL database)*
-    - `SECRET_KEY`: *(Generate a secure random string)*
-    - `DEBUG`: `False`
-    - `ALLOWED_HOSTS`: `.onrender.com,localhost,127.0.0.1,.vercel.app`
-    - `CORS_ALLOW_ALL_ORIGINS`: `True`
-
-#### 2. Frontend on Vercel:
-- In the [Vercel Dashboard](https://vercel.com/), click **Add New Project** and import the repository.
-- **Framework Preset**: `Create React App`
-- **Root Directory**: Click edit and select `Frontend`
-- **Environment Variables**:
-  - `REACT_APP_API_BASE`: `https://<your-backend-service>.onrender.com/api`
-- Click **Deploy**. Vercel will build the frontend with SPA rewrite rules configured in `Frontend/vercel.json`.
 
 ---
 
