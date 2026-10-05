@@ -152,10 +152,8 @@ export default function App() {
     <div style={S.app}>
       {/* Sidebar */}
       <aside
-        style={{
-          ...S.sidebar,
-          ...(sidebarOpen ? S.sidebarOpenMobile : {}),
-        }}
+        style={S.sidebar}
+        className={`app-sidebar ${sidebarOpen ? "app-sidebar-open" : ""}`}
       >
         <div style={S.sideTop}>
           <div style={S.logoMark}>🏛️</div>
@@ -165,7 +163,9 @@ export default function App() {
           </div>
           {/* Close button on mobile */}
           <button
+            type="button"
             style={S.closeMobileBtn}
+            className="app-sidebar-close-btn"
             onClick={() => setSidebarOpen(false)}
             aria-label="Close sidebar"
           >
@@ -221,9 +221,12 @@ export default function App() {
               <div style={{ ...S.userRole, color: roleColor }}>{role}</div>
             </div>
             <button
+              type="button"
               style={S.logoutBtn}
+              className="app-logout-btn"
               title="Sign out to landing page"
               onClick={handleSignOut}
+              aria-label="Sign out"
             >
               ⏻
             </button>
@@ -235,6 +238,7 @@ export default function App() {
       {sidebarOpen && (
         <div
           style={S.backdrop}
+          className="app-backdrop"
           onClick={() => setSidebarOpen(false)}
         />
       )}
@@ -302,9 +306,11 @@ export default function App() {
 
         {/* Header Topbar */}
         <header style={S.topbar} className="app-topbar">
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <button
+              type="button"
               style={S.hamburgerBtn}
+              className="app-hamburger-btn"
               onClick={() => setSidebarOpen((s) => !s)}
               aria-label="Toggle navigation"
             >
@@ -315,7 +321,7 @@ export default function App() {
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <span style={S.termBadge} className="app-term-badge">
               <span style={S.termDot} />
               Term 2026/27 • Active
@@ -330,6 +336,27 @@ export default function App() {
             >
               ● {role}
             </span>
+            <button
+              type="button"
+              className="app-mobile-quick-profile"
+              onClick={() => {
+                setPage("profile");
+                setSidebarOpen(false);
+              }}
+              title="My Profile"
+              aria-label="My Profile"
+            >
+              👤
+            </button>
+            <button
+              type="button"
+              className="app-mobile-quick-logout"
+              onClick={handleSignOut}
+              title="Sign out of portal"
+              aria-label="Sign out"
+            >
+              ⏻
+            </button>
           </div>
         </header>
 
@@ -379,9 +406,6 @@ const S = {
     flexDirection: "column",
     transition: "transform 0.25s ease",
     zIndex: 50,
-  },
-  sidebarOpenMobile: {
-    transform: "translateX(0) !important",
   },
   backdrop: {
     position: "fixed",

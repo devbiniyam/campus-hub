@@ -210,22 +210,126 @@
       /* ========================================================= */
       /* IN-APP DASHBOARD & SHELL RESPONSIVE RULES                 */
       /* ========================================================= */
+      .app-hamburger-btn {
+        display: none !important;
+      }
+      .app-sidebar-close-btn {
+        display: none !important;
+      }
+      .app-mobile-quick-profile,
+      .app-mobile-quick-logout {
+        display: none !important;
+      }
+
       @media (max-width: 768px) {
-        aside {
+        /* Mobile Slide-out Drawer */
+        aside.app-sidebar {
           position: fixed !important;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          transform: translateX(-100%);
-          z-index: 100 !important;
-          box-shadow: 4px 0 24px rgba(0, 0, 0, 0.6);
+          top: 0 !important;
+          bottom: 0 !important;
+          left: 0 !important;
+          width: 275px !important;
+          max-width: 82vw !important;
+          height: 100vh !important;
+          height: 100dvh !important;
+          transform: translateX(-100%) !important;
+          z-index: 1000 !important;
+          background: #ffffff !important;
+          box-shadow: 4px 0 30px rgba(0, 0, 0, 0.25) !important;
+          transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+          display: flex !important;
+          flex-direction: column !important;
         }
-        button[aria-label="Toggle navigation"] {
-          display: inline-block !important;
+        aside.app-sidebar.app-sidebar-open {
+          transform: translateX(0) !important;
         }
-        button[aria-label="Close sidebar"] {
-          display: inline-block !important;
+
+        /* Backdrop overlay when sidebar is open */
+        .app-backdrop {
+          position: fixed !important;
+          top: 0 !important;
+          bottom: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          background: rgba(15, 23, 42, 0.5) !important;
+          backdrop-filter: blur(4px) !important;
+          -webkit-backdrop-filter: blur(4px) !important;
+          z-index: 999 !important;
+          cursor: pointer !important;
         }
+
+        /* Prominent 3-dash hamburger button on mobile */
+        .app-hamburger-btn {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          width: 38px !important;
+          height: 38px !important;
+          font-size: 22px !important;
+          line-height: 1 !important;
+          border-radius: 8px !important;
+          border: 1px solid #cbd5e1 !important;
+          background: #ffffff !important;
+          color: #0f172a !important;
+          cursor: pointer !important;
+          padding: 0 !important;
+          flex-shrink: 0 !important;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+          -webkit-tap-highlight-color: transparent !important;
+        }
+        .app-hamburger-btn:active {
+          background: #f1f5f9 !important;
+          border-color: #94a3b8 !important;
+        }
+
+        /* Close button inside sidebar */
+        .app-sidebar-close-btn {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          width: 32px !important;
+          height: 32px !important;
+          font-size: 16px !important;
+          border-radius: 8px !important;
+          border: 1px solid #cbd5e1 !important;
+          background: #f1f5f9 !important;
+          color: #475569 !important;
+          cursor: pointer !important;
+          margin-left: auto !important;
+        }
+
+        /* Quick mobile profile & logout buttons on topbar */
+        .app-mobile-quick-profile {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          width: 34px !important;
+          height: 34px !important;
+          font-size: 16px !important;
+          border-radius: 8px !important;
+          border: 1px solid #cbd5e1 !important;
+          background: #ffffff !important;
+          color: #1d4ed8 !important;
+          cursor: pointer !important;
+          padding: 0 !important;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+        }
+        .app-mobile-quick-logout {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          width: 34px !important;
+          height: 34px !important;
+          font-size: 16px !important;
+          border-radius: 8px !important;
+          border: 1px solid #fecaca !important;
+          background: #fef2f2 !important;
+          color: #dc2626 !important;
+          cursor: pointer !important;
+          padding: 0 !important;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+        }
+
         .app-demo-switcher {
           padding: 6px 1rem !important;
         }
@@ -245,13 +349,13 @@
           padding-bottom: 4px !important;
         }
         .app-topbar {
-          padding: 0.75rem 1rem !important;
+          padding: 0.65rem 0.85rem !important;
         }
         .app-term-badge {
           display: none !important;
         }
         .app-page-title {
-          font-size: 15px !important;
+          font-size: 14px !important;
         }
         .app-content {
           padding: 1rem 0.75rem !important;
