@@ -131,14 +131,14 @@ export default function Login({
   };
 
   return (
-    <div style={styles.page}>
+    <div style={styles.page} className="login-page">
       {/* Decorative Ambient Glows */}
       <div style={styles.glowTop} />
       <div style={styles.glowBottom} />
 
       <div style={styles.gatewayContainer}>
         {/* Navigation Bar */}
-        <div style={styles.topNav}>
+        <div style={styles.topNav} className="login-top-nav">
           {onBackToLanding && (
             <button
               type="button"
@@ -155,9 +155,9 @@ export default function Login({
           </div>
         </div>
 
-        <div style={styles.grid}>
+        <div style={styles.grid} className="login-grid">
           {/* Left Column: Academic Seal & Multi-Color Demo Personas */}
-          <div style={styles.leftCol}>
+          <div style={styles.leftCol} className="login-left-col">
             <div style={styles.brandGroup}>
               <div style={styles.crestBox}>
                 <span style={styles.crestIcon}>🏛️</span>
@@ -179,7 +179,7 @@ export default function Login({
                 <span style={styles.personaHint}>Click to autofill</span>
               </div>
 
-              <div style={styles.personaGrid}>
+              <div style={styles.personaGrid} className="login-persona-grid">
                 {DEMO_PERSONAS.map((p) => {
                   const isSelected = selectedPersona?.username === p.username && username === p.username;
                   return (
@@ -227,10 +227,10 @@ export default function Login({
           </div>
 
           {/* Right Column: Authentication Card */}
-          <div style={styles.rightCol}>
-            <div style={styles.authCard}>
+          <div style={styles.rightCol} className="login-right-col">
+            <div style={styles.authCard} className="login-auth-card">
               <div style={styles.cardHeader}>
-                <h1 style={styles.authTitle}>Sign In to Portal</h1>
+                <h1 style={styles.authTitle} className="login-auth-title">Sign In to Portal</h1>
                 <p style={styles.authSubtitle}>
                   Enter your assigned campus credentials to access your dashboard
                 </p>

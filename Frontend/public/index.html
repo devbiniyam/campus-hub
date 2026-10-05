@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Campus Hub — University Management Platform</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,13 +11,24 @@
       *, *::before, *::after {
         box-sizing: border-box;
       }
-      html, body {
+      html {
+        -webkit-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+      body {
         margin: 0;
         padding: 0;
         background: #f8fafc;
         color: #0f172a;
         font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        width: 100%;
+      }
+      #root {
+        width: 100%;
+        overflow-x: hidden;
       }
       input:focus, select:focus, textarea:focus {
         border-color: #2563eb !important;
@@ -48,6 +59,157 @@
           transform: translateY(0);
         }
       }
+
+      /* Base Mobile Input & Text Guard - Prevents Safari iOS zoom */
+      @media screen and (max-width: 768px) {
+        input, select, textarea {
+          font-size: 16px !important;
+        }
+      }
+
+      /* Global Responsive Cards & Tables: ensures tables never force-zoom out the phone viewport */
+      .table-card-scroll,
+      [class*="tableCard"],
+      [class*="table-card"],
+      .table-responsive {
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+
+      /* ========================================================= */
+      /* LOGIN PAGE RESPONSIVE RULES                              */
+      /* ========================================================= */
+      @media (max-width: 768px) {
+        .login-page {
+          padding: 1.25rem 0.75rem !important;
+          align-items: flex-start !important;
+          min-height: 100vh !important;
+        }
+        .login-top-nav {
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          gap: 6px !important;
+          margin-bottom: 1rem !important;
+        }
+        .login-grid {
+          grid-template-columns: 1fr !important;
+          border-radius: 16px !important;
+          max-width: 100% !important;
+        }
+        .login-left-col {
+          padding: 1.5rem 1.25rem !important;
+          border-right: none !important;
+          border-bottom: 1px solid #e2e8f0 !important;
+          gap: 1.25rem !important;
+        }
+        .login-right-col {
+          padding: 1.5rem 1.25rem !important;
+        }
+        .login-persona-grid {
+          grid-template-columns: 1fr !important;
+          gap: 8px !important;
+        }
+        .login-auth-title {
+          font-size: 20px !important;
+        }
+      }
+
+      /* ========================================================= */
+      /* LANDING PAGE RESPONSIVE RULES                            */
+      /* ========================================================= */
+      @media (max-width: 860px) {
+        .landing-nav-menu {
+          display: none !important;
+        }
+        .landing-hero-grid {
+          grid-template-columns: 1fr !important;
+          gap: 2rem !important;
+        }
+        .landing-calc-container {
+          grid-template-columns: 1fr !important;
+          padding: 1.5rem 1.25rem !important;
+          gap: 1.75rem !important;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .landing-brand-subtitle {
+          display: none !important;
+        }
+        .landing-btn-signin {
+          display: none !important;
+        }
+        .landing-header-inner {
+          padding: 0.75rem 1rem !important;
+          gap: 0.75rem !important;
+        }
+        .landing-hero-section {
+          padding: 2rem 1rem 1.5rem !important;
+        }
+        .landing-hero-heading {
+          font-size: 1.85rem !important;
+          line-height: 1.2 !important;
+          letter-spacing: -0.02em !important;
+        }
+        .landing-hero-text {
+          font-size: 14px !important;
+          line-height: 1.55 !important;
+          margin-bottom: 1.5rem !important;
+        }
+        .landing-hero-btn-group {
+          margin-bottom: 1.75rem !important;
+        }
+        .landing-role-grid {
+          grid-template-columns: 1fr !important;
+        }
+        .landing-section {
+          padding: 0 1rem !important;
+          margin-bottom: 3.5rem !important;
+        }
+        .landing-section-headline {
+          font-size: 1.5rem !important;
+          letter-spacing: -0.01em !important;
+        }
+        .landing-section-lead {
+          font-size: 13px !important;
+        }
+        .landing-dept-card {
+          padding: 1.25rem 1rem !important;
+        }
+        .landing-dept-card-top {
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          gap: 10px !important;
+          padding-bottom: 1rem !important;
+          margin-bottom: 1rem !important;
+        }
+        .landing-course-cards-row {
+          grid-template-columns: 1fr !important;
+        }
+        .landing-calc-grade-val {
+          font-size: 52px !important;
+        }
+        .landing-dorm-grid {
+          grid-template-columns: 1fr !important;
+        }
+        .landing-pipeline-grid {
+          grid-template-columns: 1fr !important;
+        }
+        .landing-footer-inner {
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          gap: 1.25rem !important;
+        }
+        .landing-footer-links {
+          flex-direction: column !important;
+          gap: 8px !important;
+        }
+      }
+
+      /* ========================================================= */
+      /* IN-APP DASHBOARD & SHELL RESPONSIVE RULES                 */
+      /* ========================================================= */
       @media (max-width: 768px) {
         aside {
           position: fixed !important;
@@ -63,6 +225,36 @@
         }
         button[aria-label="Close sidebar"] {
           display: inline-block !important;
+        }
+        .app-demo-switcher {
+          padding: 6px 1rem !important;
+        }
+        .app-demo-switcher-inner {
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          gap: 6px !important;
+        }
+        .app-demo-switcher-info {
+          font-size: 11px !important;
+        }
+        .app-demo-buttons {
+          width: 100% !important;
+          overflow-x: auto !important;
+          flex-wrap: nowrap !important;
+          -webkit-overflow-scrolling: touch !important;
+          padding-bottom: 4px !important;
+        }
+        .app-topbar {
+          padding: 0.75rem 1rem !important;
+        }
+        .app-term-badge {
+          display: none !important;
+        }
+        .app-page-title {
+          font-size: 15px !important;
+        }
+        .app-content {
+          padding: 1rem 0.75rem !important;
         }
       }
     </style>

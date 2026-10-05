@@ -91,26 +91,26 @@ export default function LandingPage({ onLaunchPortal, onSelectDemo }) {
     <div style={T.page}>
       {/* Top Academic Navigation Bar */}
       <header style={T.header}>
-        <div style={T.headerInner}>
+        <div style={T.headerInner} className="landing-header-inner">
           <div style={T.brandGroup} onClick={() => scrollTo("top")} role="button" tabIndex={0}>
             <div style={T.crestIcon}>
               <span style={T.crestSymbol}>🏛️</span>
             </div>
             <div>
               <div style={T.brandTitle}>CAMPUS HUB</div>
-              <div style={T.brandSubtitle}>Higher Education Academic Registry</div>
+              <div style={T.brandSubtitle} className="landing-brand-subtitle">Higher Education Academic Registry</div>
             </div>
           </div>
 
-          <nav style={T.navMenu}>
+          <nav style={T.navMenu} className="landing-nav-menu">
             <button style={T.navLink} onClick={() => scrollTo("curriculum")}>Curriculum</button>
             <button style={T.navLink} onClick={() => scrollTo("operations")}>Academic Lifecycle</button>
             <button style={T.navLink} onClick={() => scrollTo("evaluator")}>GPA Simulator</button>
             <button style={T.navLink} onClick={() => scrollTo("credentials")}>Demo Access</button>
           </nav>
 
-          <div style={T.headerActions}>
-            <button style={T.btnNavSecondary} onClick={() => onLaunchPortal("login")}>
+          <div style={T.headerActions} className="landing-header-actions">
+            <button style={T.btnNavSecondary} className="landing-btn-signin" onClick={() => onLaunchPortal("login")}>
               Sign In
             </button>
             <button style={T.btnNavPrimary} onClick={() => onLaunchPortal("login")}>
@@ -121,8 +121,8 @@ export default function LandingPage({ onLaunchPortal, onSelectDemo }) {
       </header>
 
       {/* Main Dual-Column Hero Showcase */}
-      <section style={T.heroSection} id="top">
-        <div style={T.heroGrid}>
+      <section style={T.heroSection} className="landing-hero-section" id="top">
+        <div style={T.heroGrid} className="landing-hero-grid">
           {/* Left Column: Mission & Credentials */}
           <div style={T.heroLeft}>
             <div style={T.statusTag}>
@@ -130,19 +130,19 @@ export default function LandingPage({ onLaunchPortal, onSelectDemo }) {
               <span>ACADEMIC TERM 2026/27 • REGISTRY ACTIVE</span>
             </div>
 
-            <h1 style={T.heroHeading}>
+            <h1 style={T.heroHeading} className="landing-hero-heading">
               The Unified <br />
               <span style={T.heroHeadingAccent}>Academic Operating System</span> <br />
               for Modern Universities
             </h1>
 
-            <p style={T.heroText}>
+            <p style={T.heroText} className="landing-hero-text">
               A rigorous student information platform engineered for academic governance.
               Enforcing semester registration checkpoints, faculty mark submissions, automated
               GPA & probation engines, and capacity-locked dormitory allocations with absolute database integrity.
             </p>
 
-            <div style={T.heroButtonGroup}>
+            <div style={T.heroButtonGroup} className="landing-hero-btn-group">
               <button style={T.heroPrimaryBtn} onClick={() => onLaunchPortal("login")}>
                 Enter Campus Portal
               </button>
@@ -158,7 +158,7 @@ export default function LandingPage({ onLaunchPortal, onSelectDemo }) {
                 <span style={T.accessCardNote}>Pre-fills credentials on Sign In</span>
               </div>
 
-              <div style={T.roleGrid}>
+              <div style={T.roleGrid} className="landing-role-grid">
                 <div
                   style={{
                     ...T.rolePill,
@@ -278,7 +278,7 @@ export default function LandingPage({ onLaunchPortal, onSelectDemo }) {
                       <div style={T.tHonorBadge}>DEAN'S LIST</div>
                     </div>
 
-                    <div style={T.tMetricsRow}>
+                    <div style={T.tMetricsRow} className="landing-t-metrics-row">
                       <div style={{ ...T.tMetricBox, background: "#f0f9ff", border: "1px solid #bae6fd" }}>
                         <div style={{ ...T.tMetricNum, color: "#0284c7" }}>4.00</div>
                         <div style={T.tMetricLabel}>Semester GPA</div>
@@ -293,7 +293,7 @@ export default function LandingPage({ onLaunchPortal, onSelectDemo }) {
                       </div>
                     </div>
 
-                    <div style={T.tCourseTable}>
+                    <div style={T.tCourseTable} className="landing-t-course-table">
                       <div style={T.tTableHead}>
                         <span>Course</span>
                         <span>Units</span>
@@ -375,7 +375,7 @@ export default function LandingPage({ onLaunchPortal, onSelectDemo }) {
                       </span>
                     </div>
 
-                    <div style={T.dormGrid}>
+                    <div style={T.dormGrid} className="landing-dorm-grid">
                       <div style={{ ...T.dormBox, background: "#f0f9ff", border: "1px solid #bae6fd" }}>
                         <div style={T.dormHeader}>
                           <span style={{ color: "#0284c7" }}>Block 1 (Male Residence)</span>
@@ -415,17 +415,17 @@ export default function LandingPage({ onLaunchPortal, onSelectDemo }) {
       </section>
 
       {/* University Department Catalog */}
-      <section style={T.section} id="curriculum">
+      <section style={T.section} className="landing-section" id="curriculum">
         <div style={T.sectionHeader}>
           <div style={T.sectionEyebrow}>ACADEMIC DEPARTMENTS</div>
-          <h2 style={T.sectionHeadline}>Browse University Disciplines & Course Offerings</h2>
-          <p style={T.sectionLead}>
+          <h2 style={T.sectionHeadline} className="landing-section-headline">Browse University Disciplines & Course Offerings</h2>
+          <p style={T.sectionLead} className="landing-section-lead">
             Explore faculties and live curriculum governed by Campus Hub.
           </p>
         </div>
 
         {/* Department Selection Tabs */}
-        <div style={T.deptTabRow}>
+        <div style={T.deptTabRow} className="landing-dept-tab-row">
           {Object.keys(departments).map((k) => {
             const d = departments[k];
             const isActive = activeDept === k;
@@ -449,8 +449,8 @@ export default function LandingPage({ onLaunchPortal, onSelectDemo }) {
         </div>
 
         {/* Department Details Card */}
-        <div style={{ ...T.deptCard, background: departments[activeDept].bg, borderColor: departments[activeDept].border }}>
-          <div style={T.deptCardTop}>
+        <div style={{ ...T.deptCard, background: departments[activeDept].bg, borderColor: departments[activeDept].border }} className="landing-dept-card">
+          <div style={T.deptCardTop} className="landing-dept-card-top">
             <div>
               <h3 style={{ ...T.deptCardTitle, color: departments[activeDept].accent }}>
                 {departments[activeDept].name} Department
@@ -467,7 +467,7 @@ export default function LandingPage({ onLaunchPortal, onSelectDemo }) {
             </button>
           </div>
 
-          <div style={T.courseCardsRow}>
+          <div style={T.courseCardsRow} className="landing-course-cards-row">
             {departments[activeDept].courses.map((c) => (
               <div key={c.code} style={T.courseItemCard}>
                 <div style={{ ...T.courseCodeBadge, color: departments[activeDept].accent, background: "#ffffff", border: `1px solid ${departments[activeDept].border}` }}>
@@ -485,17 +485,17 @@ export default function LandingPage({ onLaunchPortal, onSelectDemo }) {
       </section>
 
       {/* Live GPA & Standing Simulator Sandbox */}
-      <section style={T.section} id="evaluator">
+      <section style={T.section} className="landing-section" id="evaluator">
         <div style={T.sectionHeader}>
           <div style={T.sectionEyebrow}>ACADEMIC AUDIT TOOL</div>
-          <h2 style={T.sectionHeadline}>Interactive GPA & Honors Standing Calculator</h2>
-          <p style={T.sectionLead}>
+          <h2 style={T.sectionHeadline} className="landing-section-headline">Interactive GPA & Honors Standing Calculator</h2>
+          <p style={T.sectionLead} className="landing-section-lead">
             Simulate how course marks dynamically influence academic standing and transcript outcomes.
           </p>
         </div>
 
-        <div style={T.calcContainer}>
-          <div style={T.calcInputsPanel}>
+        <div style={T.calcContainer} className="landing-calc-container">
+          <div style={T.calcInputsPanel} className="landing-calc-inputs-panel">
             <div style={T.calcGroup}>
               <div style={T.calcGroupHeader}>
                 <label style={T.calcLabel}>Student Assessment Score (0 – 100)</label>
@@ -535,9 +535,9 @@ export default function LandingPage({ onLaunchPortal, onSelectDemo }) {
             </div>
           </div>
 
-          <div style={T.calcResultsPanel}>
+          <div style={T.calcResultsPanel} className="landing-calc-results-panel">
             <div style={T.resultGradeTitle}>Projected Unit Grade</div>
-            <div style={{ ...T.resultGradeValue, color: standing.tone }}>{standing.grade}</div>
+            <div style={{ ...T.resultGradeValue, color: standing.tone }} className="landing-calc-grade-val">{standing.grade}</div>
 
             <div style={T.resBreakdown}>
               <div style={T.resStatBox}>
@@ -561,16 +561,16 @@ export default function LandingPage({ onLaunchPortal, onSelectDemo }) {
       </section>
 
       {/* University Operations Lifecycle */}
-      <section style={T.section} id="operations">
+      <section style={T.section} className="landing-section" id="operations">
         <div style={T.sectionHeader}>
           <div style={T.sectionEyebrow}>GOVERNANCE LIFECYCLE</div>
-          <h2 style={T.sectionHeadline}>How Campus Hub Enforces University Workflows</h2>
-          <p style={T.sectionLead}>
+          <h2 style={T.sectionHeadline} className="landing-section-headline">How Campus Hub Enforces University Workflows</h2>
+          <p style={T.sectionLead} className="landing-section-lead">
             A sequential five-stage pipeline designed for institutional compliance.
           </p>
         </div>
 
-        <div style={T.pipelineGrid}>
+        <div style={T.pipelineGrid} className="landing-pipeline-grid">
           {[
             { n: "01", t: "Term & Catalog Calibration", d: "Admins establish academic terms, credit curricula, and student cohort sections.", bg: "#eff6ff", border: "#bfdbfe", text: "#1d4ed8" },
             { n: "02", t: "Faculty Course Assignment", d: "Department deans assign course heads and synchronize active lecture rosters.", bg: "#ecfdf5", border: "#a7f3d0", text: "#047857" },
@@ -588,8 +588,8 @@ export default function LandingPage({ onLaunchPortal, onSelectDemo }) {
       </section>
 
       {/* Campus Footer */}
-      <footer style={T.footer}>
-        <div style={T.footerInner}>
+      <footer style={T.footer} className="landing-footer">
+        <div style={T.footerInner} className="landing-footer-inner">
           <div style={T.footerBrandRow}>
             <div style={T.crestIconSmall}>🏛️</div>
             <div>
@@ -598,7 +598,7 @@ export default function LandingPage({ onLaunchPortal, onSelectDemo }) {
             </div>
           </div>
 
-          <div style={T.footerLinks}>
+          <div style={T.footerLinks} className="landing-footer-links">
             <button style={T.fBtn} onClick={() => scrollTo("top")}>Back to Top</button>
             <button style={T.fBtn} onClick={() => scrollTo("curriculum")}>Curriculum</button>
             <button style={T.fBtn} onClick={() => scrollTo("evaluator")}>GPA Simulator</button>
@@ -723,7 +723,7 @@ const T = {
   },
   heroGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
     gap: "3rem",
     alignItems: "flex-start",
   },
@@ -752,7 +752,7 @@ const T = {
     boxShadow: "0 0 8px #60a5fa",
   },
   heroHeading: {
-    fontSize: "clamp(2.2rem, 4vw, 3.25rem)",
+    fontSize: "clamp(1.75rem, 4vw, 3.25rem)",
     fontWeight: "800",
     lineHeight: 1.15,
     letterSpacing: "-0.03em",
@@ -967,7 +967,9 @@ const T = {
     background: "#ffffff",
     border: "1px solid #e2e8f0",
     borderRadius: "10px",
-    overflow: "hidden",
+    overflowX: "auto",
+    overflowY: "hidden",
+    WebkitOverflowScrolling: "touch",
   },
   tTableHead: {
     display: "grid",
@@ -1183,7 +1185,7 @@ const T = {
     borderRadius: "18px",
     padding: "2.25rem",
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
     gap: "2.5rem",
     alignItems: "center",
     boxShadow: "0 12px 30px rgba(15, 23, 42, 0.06)",

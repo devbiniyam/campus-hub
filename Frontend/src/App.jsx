@@ -242,16 +242,16 @@ export default function App() {
       {/* Main Content Area */}
       <div style={S.main}>
         {/* Top In-App Interactive Demo Switcher Bar */}
-        <div style={S.demoSwitcherBar}>
-          <div style={S.demoSwitcherInner}>
-            <div style={S.demoSwitcherInfo}>
+        <div style={S.demoSwitcherBar} className="app-demo-switcher">
+          <div style={S.demoSwitcherInner} className="app-demo-switcher-inner">
+            <div style={S.demoSwitcherInfo} className="app-demo-switcher-info">
               <span style={{ fontSize: "14px" }}>🏛️</span>
               <span style={S.demoSwitcherTitle}>Academic Sandbox:</span>
               <span style={S.demoCurrentRole}>
                 Logged in as <strong>{payload?.username}</strong> ({role})
               </span>
             </div>
-            <div style={S.demoSwitcherButtons}>
+            <div style={S.demoSwitcherButtons} className="app-demo-buttons">
               <button
                 type="button"
                 style={{
@@ -301,7 +301,7 @@ export default function App() {
         </div>
 
         {/* Header Topbar */}
-        <header style={S.topbar}>
+        <header style={S.topbar} className="app-topbar">
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <button
               style={S.hamburgerBtn}
@@ -311,12 +311,12 @@ export default function App() {
               ☰
             </button>
             <div>
-              <h2 style={S.pageTitle}>{PAGE_TITLES[page] || "Dashboard"}</h2>
+              <h2 style={S.pageTitle} className="app-page-title">{PAGE_TITLES[page] || "Dashboard"}</h2>
             </div>
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            <span style={S.termBadge}>
+            <span style={S.termBadge} className="app-term-badge">
               <span style={S.termDot} />
               Term 2026/27 • Active
             </span>
@@ -334,7 +334,7 @@ export default function App() {
         </header>
 
         {/* Content Body */}
-        <main style={S.content}>
+        <main style={S.content} className="app-content">
           {/* STUDENT */}
           {page === "dashboard"    && role === "STUDENT" && <StudentDashboard user={payload} />}
           {page === "registration" && role === "STUDENT" && <RegistrationPage />}

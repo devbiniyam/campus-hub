@@ -17,16 +17,19 @@ const S = {
   },
   tableCard: {
     background: "#ffffff", border: "1px solid #e2e8f0",
-    borderRadius: "14px", overflow: "hidden", marginBottom: "1.25rem",
+    borderRadius: "14px", overflowX: "auto", overflowY: "hidden",
+    WebkitOverflowScrolling: "touch", marginBottom: "1.25rem",
     boxShadow: "0 2px 10px rgba(0,0,0,0.04)",
   },
   tableHeader: {
     display: "grid", gridTemplateColumns: "1fr 80px 110px 110px 80px 140px",
+    minWidth: "620px",
     padding: "12px 14px", borderBottom: "1px solid #e2e8f0", background: "#f8fafc",
     fontSize: "11px", color: "#475569", fontWeight: "700", textTransform: "uppercase",
   },
   tableRow: {
     display: "grid", gridTemplateColumns: "1fr 80px 110px 110px 80px 140px",
+    minWidth: "620px",
     padding: "12px 14px", borderBottom: "1px solid #f1f5f9",
     fontSize: "13px", color: "#1e293b", alignItems: "center",
   },

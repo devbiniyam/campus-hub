@@ -8,9 +8,9 @@ const S = {
   filterRow: { display: "flex", gap: "8px", marginBottom: "1.25rem", flexWrap: "wrap" },
   filterBtn: { fontSize: "12px", padding: "6px 14px", borderRadius: "20px", border: "1px solid #cbd5e1", background: "#ffffff", color: "#475569", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: "600", transition: "all .15s ease" },
   filterBtnActive: { background: "#eff6ff", color: "#1d4ed8", borderColor: "#2563eb", fontWeight: "700" },
-  tableCard: { background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "14px", overflow: "hidden", marginBottom: "1.25rem", boxShadow: "0 2px 10px rgba(0,0,0,0.04)" },
-  tableHeader: { display: "grid", gridTemplateColumns: "1fr 100px 120px 100px 120px", padding: "12px 14px", borderBottom: "1px solid #e2e8f0", background: "#f8fafc", fontSize: "11px", color: "#475569", fontWeight: "700", textTransform: "uppercase" },
-  tableRow: { display: "grid", gridTemplateColumns: "1fr 100px 120px 100px 120px", padding: "12px 14px", borderBottom: "1px solid #f1f5f9", fontSize: "13px", color: "#1e293b", alignItems: "center" },
+  tableCard: { background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: "14px", overflowX: "auto", overflowY: "hidden", WebkitOverflowScrolling: "touch", marginBottom: "1.25rem", boxShadow: "0 2px 10px rgba(0,0,0,0.04)" },
+  tableHeader: { display: "grid", gridTemplateColumns: "1fr 100px 120px 100px 120px", minWidth: "540px", padding: "12px 14px", borderBottom: "1px solid #e2e8f0", background: "#f8fafc", fontSize: "11px", color: "#475569", fontWeight: "700", textTransform: "uppercase" },
+  tableRow: { display: "grid", gridTemplateColumns: "1fr 100px 120px 100px 120px", minWidth: "540px", padding: "12px 14px", borderBottom: "1px solid #f1f5f9", fontSize: "13px", color: "#1e293b", alignItems: "center" },
   roleBadge: (r) => ({
     fontSize: "11px", padding: "3px 10px", borderRadius: "20px", fontWeight: "700",
     background: r === "STUDENT" ? "#e0f2fe" : r === "TEACHER" ? "#ecfdf5" : "#fffbeb",
