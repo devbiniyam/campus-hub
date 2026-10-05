@@ -380,23 +380,17 @@ OK
 
 ---
 
-### Environment Variables Matrix
+### Configuration
 
-#### Backend (`Backend/backend/.env`)
+Optional environment variables:
 
-| Variable | Description | Production Default | Local Default |
-| :--- | :--- | :--- | :--- |
-| `SECRET_KEY` | Django cryptographic signing key | Strong random string | Insecure dev key |
-| `DEBUG` | Enable debug mode | `False` | `True` |
-| `DATABASE_URL` | PostgreSQL connection URI | `postgres://user:pass@host:5432/db` | None *(uses SQLite)* |
-| `ALLOWED_HOSTS` | Comma-separated allowed hostnames | `.onrender.com,.vercel.app` | `*,localhost,127.0.0.1` |
-| `CORS_ALLOW_ALL_ORIGINS`| Allow cross-origin requests | `True` *(or restrict to domain)* | `True` |
-
-#### Frontend (`Frontend/.env`)
-
-| Variable | Description | Production Default | Local Default |
-| :--- | :--- | :--- | :--- |
-| `REACT_APP_API_BASE` | Base URL for REST API endpoints | `https://your-backend.onrender.com/api` | `http://127.0.0.1:8000/api` |
+| Variable | Description | Default |
+| :--- | :--- | :--- |
+| `SECRET_KEY` | Django cryptographic signing key | Insecure dev key |
+| `DEBUG` | Enable debug mode (`True` / `False`) | `True` |
+| `DATABASE_URL` | Database connection URI (PostgreSQL or SQLite) | None *(uses local SQLite)* |
+| `ALLOWED_HOSTS` | Comma-separated allowed hostnames | `*,localhost,127.0.0.1` |
+| `REACT_APP_API_BASE` | Base URL for frontend REST API endpoints | `http://127.0.0.1:8000/api` |
 
 ---
 
