@@ -21,6 +21,7 @@
 ## 📑 Table of Contents
 
 - [Overview](#overview)
+- [Interface Screenshots](#interface-screenshots)
 - [Multi-Color Light Design System](#multi-color-light-design-system)
 - [Interactive Demo Testing](#interactive-demo-testing)
 - [Architecture & System Design](#architecture--system-design)
@@ -45,6 +46,60 @@
 **Campus Hub** is an institutional academic management system that mirrors real-world university registrar and faculty workflows. The platform orchestrates the complete student lifecycle — from semester configuration, department catalogs, and course registration to atomic enrollment approvals, mark-to-grade conversions, cumulative GPA calculations, and dormitory room allocations.
 
 Every business rule is enforced at the database and transaction level — not merely in the UI — preventing invalid course enrollments, duplicate registrations, capacity oversubscription, or grade inconsistencies.
+
+---
+
+## 📸 Interface Screenshots
+
+<div align="center">
+
+### Student Academic Dashboard
+*Real-time Semester & Cumulative GPA tracking, enrolled courses roster, and academic standing.*
+<br/>
+
+![Student Dashboard](screenshots/student-dashboard.png)
+
+<br/>
+
+### Administrator Operations Console
+*Comprehensive registrar management: active semester controls, department counts, and student/faculty registries.*
+<br/>
+
+![Admin Dashboard](screenshots/admin-dashboard.png)
+
+<br/>
+
+### Faculty Grade Entry & Submission
+*Active course rosters with 0–100 numerical mark input and instant, automated letter grade & quality point derivation.*
+<br/>
+
+![Grade Submission](screenshots/grade-submission.png)
+
+<br/>
+
+### Student Course Registration
+*Course catalog browsing, semester registration requests, and credit limit validation.*
+<br/>
+
+![Course Registration](screenshots/registration.png)
+
+<br/>
+
+### Faculty Teaching Roster & Audit Portal
+*Course assignments, enrolled student rosters, and grade change audit request feed.*
+<br/>
+
+![Teacher Dashboard](screenshots/teacher-dashboard.png)
+
+<br/>
+
+### Gatekeeper Authentication & Demo Access
+*Secure JWT authentication gateway with 1-click test persona autofill.*
+<br/>
+
+![Login](screenshots/login.png)
+
+</div>
 
 ---
 
